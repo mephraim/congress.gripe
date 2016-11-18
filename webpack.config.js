@@ -1,4 +1,5 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -16,6 +17,10 @@ module.exports = {
         from: './data/congress.json',
         to: 'congress.json'
       },
-    ])
+    ]),
+
+    new ngAnnotatePlugin({
+      add: true
+    })
   ]
 };

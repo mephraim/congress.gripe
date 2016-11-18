@@ -3,19 +3,56 @@
 <head>
   <script src="/assets/javascripts/app.js"></script>
 </head>
-<body>
+<body ng-app="CongressApp">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <div id="placeholder-rr"></div>
   <script>
     window.onload = function() {
-      gapi.hangout.render('placeholder-rr', {
-        'invites': [
-          { id : '3192905396', invite_type : 'PHONE' }
-        ],
-        'render': 'createhangout',
-        'widget_size': 175
-      });
     };
   </script>
+
+  <div ng-controller="MembersController as membersCtrl">
+    <ul>
+      <li ng-repeat="member in membersCtrl.members">
+        {{member.person.firstname}} {{member.person.lastname}}
+        <button ng-click="membersCtrl.showMore(member)">
+          More
+        </button>
+      </li>
+    </ul>
+
+    <style>
+      .more-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 500px;
+        width: 500px;
+        border: solid black;
+        background: #fff;
+      }
+    </style>
+
+    <div class="more-box" ng-show="membersCtrl.current">
+      <h1>
+        {{membersCtrl.current.person.firstname}}
+        {{membersCtrl.current.person.lastname}}
+      </h1>
+
+      {{membersCtrl.current.party}}
+      {{membersCtrl.current.title_long}}
+      ({{membersCtrl.current.state}})
+
+      <p>
+        <span id="hangout-placeholder"></span>
+      </p>
+
+      <p>
+        <button ng-click="membersCtrl.closeMore()">
+          Close
+        </button>
+      </p>
+    </div>
+  </div>
 </body>
 </html>
