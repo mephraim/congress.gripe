@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="/assets/javascripts/app.js"></script>
+</head>
+<body>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <div id="placeholder-rr"></div>
+  <script>
+    window.onload = function() {
+      gapi.hangout.render('placeholder-rr', {
+        'invites': [
+          { id : '3192905396', invite_type : 'PHONE' }
+        ],
+        'render': 'createhangout',
+        'widget_size': 175
+      });
+    };
+  </script>
+</body>
+</html>
