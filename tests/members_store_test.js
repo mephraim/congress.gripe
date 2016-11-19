@@ -27,4 +27,14 @@ describe('MembersStore', function() {
       expect(hillaries[0].person.firstname).toEqual('Hillary');
     });
   });
+
+  describe('findById', function() {
+    it('finds a member by their govtrack id', function() {
+      var found = subject.findById(400034);
+
+      expect(found.person.id).toEqual(400034);
+      expect(found.person.firstname).toEqual('Ronald');
+      expect(found.person.lastname).toEqual('McDonald');
+    });
+  });
 });

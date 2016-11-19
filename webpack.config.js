@@ -2,6 +2,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -23,19 +24,33 @@ module.exports = {
   },
 
   plugins: [
+    // Copy static aassets into the build directory
     new CopyWebpackPlugin([{
       from: './site/index.html',
       to: 'index.html'
-    }, {
+    },{
+      from: './site/templates',
+      to: 'templates'
+    },{
       from: './data/congress_members.json',
       to: 'data/congress_members.json'
     }]),
 
+    // Pull any required CSS out into a main.css file
     new ExtractTextPlugin('assets/main.css'),
-    new ngAnnotatePlugin({ add: true })
+
+    // Automatically inject Angular dependencies using @ngInject
+    new ngAnnotatePlugin({ add: true }),
+
+    // Optimize using Uglify
+    new webpack.optimize.UglifyJsPlugin({
+      compress: true 
+    })
   ],
 
   devServer: {
+    compress: true,
+    historyApiFallback: true,
     inline: false
   }
 };

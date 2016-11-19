@@ -1,55 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <base href="/">
+
   <script src="/assets/app.js"></script>
   <script src="https://apis.google.com/js/platform.js"></script>
   <link rel="stylesheet" href="/assets/main.css" />
 </head>
 <body ng-app="CongressApp">
-  <div ng-controller="MembersController as membersCtrl" ng-cloak>
-    <input id="search-box"
-           ng-model="membersCtrl.currentSearch"
-           placeholder="Search for a member of congress"
-           ng-class="membersCtrl.getSearchBoxClass()" />
-
-    <ul id="member-list">
-      <li class="congress-member" ng-repeat="member in membersCtrl.currentMembers">
-        <span class="congress-member__name">
-          {{member.person.firstname}} {{member.person.lastname}}
-        </span>
-
-        <span class="congress-member__title">
-          {{member.party}} {{member.title_long}}
-        </span>
-        <button ng-click="membersCtrl.showMore(member)">
-          More
-        </button>
-      </li>
-    </ul>
-
-    <div class="more-box" ng-if="membersCtrl.current">
-      <h1>
-        {{membersCtrl.current.person.firstname}}
-        {{membersCtrl.current.person.lastname}}
-      </h1>
-
-      <img src="https://www.govtrack.us/data/photos/{{membersCtrl.current.person.id}}-100px.jpeg"
-           width="100" />
-
-      {{membersCtrl.current.party}}
-      {{membersCtrl.current.title_long}}
-      ({{membersCtrl.current.state}})
-
-      <p>
-        <span id="hangout-placeholder"></span>
-      </p>
-
-      <p>
-        <button ng-click="membersCtrl.closeMore()">
-          Close
-        </button>
-      </p>
-    </div>
-  </div>
+  <div ng-view></div>
 </body>
 </html>

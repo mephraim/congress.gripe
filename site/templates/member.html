@@ -1,0 +1,17 @@
+<h1>
+  {{memberCtrl.member.person.firstname}}
+  {{memberCtrl.member.person.lastname}}
+</h1>
+
+<img ng-src="https://www.govtrack.us/data/photos/{{memberCtrl.member.person.id}}-100px.jpeg"
+     width="100" />
+
+{{memberCtrl.member.party}}
+{{memberCtrl.member.title_long}}
+({{memberCtrl.member.state}})
+
+<p>
+  <span id="hangout-placeholder"></span>
+</p>
+
+<a href="/">Back</a>

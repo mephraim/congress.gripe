@@ -1,0 +1,17 @@
+<input id="search-box"
+       ng-model="homeCtrl.currentSearch"
+       placeholder="Search for a member of congress"
+       ng-class="homeCtrl.getSearchBoxClass()" />
+<ul id="member-list">
+  <li class="congress-member" ng-repeat="member in homeCtrl.currentMembers">
+    <a href="/members/{{member.person.id}}">
+      <span class="congress-member__name">
+        {{member.person.firstname}} {{member.person.lastname}}
+      </span>
+
+      <span class="congress-member__title">
+        {{member.party}} {{member.title_long}}
+      </span>
+    </a>
+  </li>
+</ul>

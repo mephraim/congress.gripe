@@ -1,8 +1,12 @@
 require('angular').
-  module('CongressApp', []).
+  module('CongressApp', [require('angular-route')]).
 
-  controller('MembersController',
-    require('./controllers/members_controller.js')).
+  config(require('./config.js')).
+
+  controller('HomeController',
+    require('./controllers/home_controller.js')).
+  controller('MemberController',
+    require('./controllers/member_controller.js')).
 
   service('HangoutService',
     require('./services/hangout_service.js')).

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
     "fuse.js": "^2.5.0"
   },
   "devDependencies": {
