@@ -2,36 +2,26 @@
 <html>
 <head>
   <script src="/assets/javascripts/app.js"></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <link rel="stylesheet" href="/assets/stylesheets/main.css" />
 </head>
 <body ng-app="CongressApp">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <div id="placeholder-rr"></div>
-  <script>
-    window.onload = function() {
-    };
-  </script>
+  <div ng-controller="MembersController as membersCtrl" ng-cloak>
+    <input id="search-box"
+           ng-model="membersCtrl.currentSearch"
+           ng-model-options="{ debounce: 100 }"
+           placeholder="Search for a member of congress"
+           ng-class="membersCtrl.getSearchBoxClass()" />
 
-  <div ng-controller="MembersController as membersCtrl">
-    <ul>
-      <li ng-repeat="member in membersCtrl.members">
-        {{member.person.firstname}} {{member.person.lastname}}
+    <ul id="member-list">
+      <li ng-repeat="member in membersCtrl.currentMembers">
+        {{member.firstname}}
+        {{member.lastname}}
         <button ng-click="membersCtrl.showMore(member)">
           More
         </button>
       </li>
     </ul>
-
-    <style>
-      .more-box {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 500px;
-        width: 500px;
-        border: solid black;
-        background: #fff;
-      }
-    </style>
 
     <div class="more-box" ng-show="membersCtrl.current">
       <h1>
