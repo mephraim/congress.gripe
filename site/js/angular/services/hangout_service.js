@@ -7,7 +7,7 @@ function HangoutService($window) {
       $window.gapi.hangout.render(domId, {
         'invites': [
           {
-            id : phone,
+            id : phoneNumber,
             invite_type : 'PHONE'
           }
         ],

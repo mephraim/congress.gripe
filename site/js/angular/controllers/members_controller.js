@@ -34,6 +34,7 @@ MembersController.prototype.closeMore = function() {
 
 MembersController.prototype._search = function() {
   this.currentMembers = this.MembersStoreService.search(this.currentSearch);
+  console.log(this.currentMembers[0]);
 };
 
 module.exports = MembersController;

@@ -36,6 +36,6 @@ module.exports = {
   ],
 
   devServer: {
-    inline: true
+    inline: false
   }
 };

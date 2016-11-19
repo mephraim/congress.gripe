@@ -26,18 +26,17 @@ MembersStore.prototype.search = function(query) {
  */
 MembersStore.prototype._loadData = function(data) {
   this._memberFuse = new Fuse(data.objects, {
-    shouldSort: true,
-    threshold: 0.5,
-    location: 0,
     distance: 100,
+    location: 0,
     maxPatternLength: 32,
+    shouldSort: true,
+    threshold: 0.3,
     keys: [
-      'party',
-      'person.firstname',
-      'person.gender',
-      'person.lastname',
-      'person.twitterid',
-      'person.youtubeid'
+      { name: 'person.name', weight: 0.9 },
+      { name: 'person.firsname', weight: 0.3 },
+      { name: 'person.lastname', weight: 0.3 },
+      { name: 'person.twitterid', weight: 0.2 },
+      { name: 'person.youtubeid', weight: 0.2 }
     ]
   });
 };

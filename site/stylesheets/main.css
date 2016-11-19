@@ -1,16 +1,31 @@
 #member-list {
-  border: 1px solid black;
+  list-style: none;
+  margin: 30px auto;
+  width: 800px;
+}
+
+#member-list .congress-member {
+  margin: 10px;
+}
+
+#member-list .congress-member__name {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#member-list .congress-member__title {
+  font-size: 20px;
+  color: #888;
 }
 
 #search-box {
   display: block;
-  margin: 300px auto;
   font-size: 20px;
+  margin: 300px auto;
   padding: 10px;
   text-align: center;
-  width: 400px;
-
   transition: margin .2s;
+  width: 400px;
 }
 
 #search-box.collapsed {
@@ -18,11 +33,11 @@
 }
 
 .more-box {
+  background: #fff;
+  border: solid black;
+  height: 500px;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
-  height: 500px;
   width: 500px;
-  border: solid black;
-  background: #fff;
 }
