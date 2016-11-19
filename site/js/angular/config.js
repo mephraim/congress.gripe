@@ -9,7 +9,7 @@ function Config($locationProvider, $routeProvider) {
       controller:'HomeController as homeCtrl',
       templateUrl:'/templates/home.html',
     }).
-    when('/members/:memberId', {
+    when('/members/:name/:memberId', {
       controller:'MemberController as memberCtrl',
       templateUrl:'/templates/member.html'
     }).

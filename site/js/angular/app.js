@@ -11,4 +11,6 @@ require('angular').
   service('HangoutService',
     require('./services/hangout_service.js')).
   service('MembersStoreService',
-    require('./services/members_store_service.js'));
+    require('./services/members_store_service.js')).
+  service('PartyInfoService',
+    require('./services/party_info_service.js'));

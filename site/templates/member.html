@@ -1,17 +1,36 @@
-<h1>
-  {{memberCtrl.member.person.firstname}}
-  {{memberCtrl.member.person.lastname}}
-</h1>
+<div id="member-card"
+     class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h1 class="mdl-card__title-text">
+      {{memberCtrl.member.person.firstname}}
+      {{memberCtrl.member.person.lastname}}
+    </h1>
 
-<img ng-src="https://www.govtrack.us/data/photos/{{memberCtrl.member.person.id}}-100px.jpeg"
-     width="100" />
+    <span id="member-card__party-chip"
+          class="mdl-chip mdl-chip--contact">
+      <span class="mdl-chip__contact mdl-color--red mdl-color-text--white"
+            ng-class="memberCtrl.getPartyChipClass()">
+        {{memberCtrl.getPartyChipParty()}}
+      </span>
+      <span class="mdl-chip__text">
+        {{memberCtrl.member.title_long}}
+      </span>
+    </span>
+  </div>
 
-{{memberCtrl.member.party}}
-{{memberCtrl.member.title_long}}
-({{memberCtrl.member.state}})
+  <div class="mdl-card__supporting-text">
 
-<p>
-  <span id="hangout-placeholder"></span>
-</p>
+    <img ng-src="https://www.govtrack.us/data/photos/{{memberCtrl.member.person.id}}-100px.jpeg"
+         width="100" />
 
-<a href="/">Back</a>
+    <p>
+      <span id="hangout-placeholder"></span>
+    </p>
+  </div>
+
+  <div class="mdl-card__actions mdl-card--border">
+    <a href="/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      Search again
+    </a>
+  </div>
+</div>

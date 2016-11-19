@@ -1,12 +1,13 @@
 /**
  * @ngInject
  */
-function MembersController($http, $scope, $window, HangoutService, MembersStoreService) {
+function HomeController($http, $scope, $window, HangoutService, MembersStoreService, PartyInfoService) {
   var self = this;
   self.$http = $http;
   self.$window = $window;
   self.HangoutService = HangoutService;
   self.MembersStoreService = MembersStoreService;
+  self.PartyInfoService = PartyInfoService;
 
   $scope.$watch(function() {
     return self.currentSearch;
@@ -17,26 +18,34 @@ function MembersController($http, $scope, $window, HangoutService, MembersStoreS
   });
 }
 
-MembersController.prototype.getSearchBoxClass = function() {
+HomeController.prototype.getPartyColorForMember = function(member) {
+  return this.PartyInfoService.getPartyTextColorForMember(member);
+};
+
+HomeController.prototype.getSearchCardClass = function() {
   if (this.currentMembers && this.currentMembers.length > 0) {
     return ['collapsed'];
   }
 };
 
-MembersController.prototype.showMore = function(member) {
+HomeController.prototype.hasCurrentMembers = function() {
+  return this.currentMembers && this.currentMembers.length > 0;
+};
+
+HomeController.prototype.showMore = function(member) {
   this.current = member;
   this.HangoutService.renderButton('hangout-placeholder', member.phone);
 };
 
-MembersController.prototype.closeMore = function() {
+HomeController.prototype.closeMore = function() {
   this.current = null;
 };
 
-MembersController.prototype._search = function() {
+HomeController.prototype._search = function() {
   var self = this;
   self.MembersStoreService.search(this.currentSearch).then(function(members) {
     self.currentMembers = members;
   });
 };
 
-module.exports = MembersController;
+module.exports = HomeController;

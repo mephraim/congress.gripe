@@ -1,17 +1,33 @@
-<input id="search-box"
-       ng-model="homeCtrl.currentSearch"
-       placeholder="Search for a member of congress"
-       ng-class="homeCtrl.getSearchBoxClass()" />
-<ul id="member-list">
-  <li class="congress-member" ng-repeat="member in homeCtrl.currentMembers">
-    <a href="/members/{{member.person.id}}">
-      <span class="congress-member__name">
-        {{member.person.firstname}} {{member.person.lastname}}
-      </span>
+<div id="search-card"
+     class="mdl-card mdl-shadow--2dp"
+     ng-class="homeCtrl.getSearchCardClass()">
+  <input id="search-card__search-box"
+         class="mdl-textfield__input"
+         type="text"
+         placeholder="Find a member of congress"
+         ng-model="homeCtrl.currentSearch">
 
-      <span class="congress-member__title">
-        {{member.party}} {{member.title_long}}
-      </span>
-    </a>
-  </li>
-</ul>
+  <ul class="mdl-list search-card__search-results"
+      ng-show="homeCtrl.hasCurrentMembers()">
+    <li class="mdl-list__item mdl-list__item--three-line search-card__search-result"
+        ng-repeat="member in homeCtrl.currentMembers">
+      <a href="/members/{{member.person.firstname}}+{{member.person.lastname}}/{{member.person.id}}">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-icon search-card__search-result__icon"
+             ng-class="homeCtrl.getPartyColorForMember(member)">
+            reply
+          </i>
+          
+          <span>
+            {{member.person.firstname}} {{member.person.lastname}}
+          </span>
+
+          <span class="mdl-list__item-text-body">
+            {{member.party}} {{member.title_long}}
+          </span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
+
