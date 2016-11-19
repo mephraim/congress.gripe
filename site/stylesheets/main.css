@@ -49,8 +49,35 @@
   width: 800px;
 }
 
-#member-card__party-chip {
+.member-card__party-chip {
   position: absolute;
   right: 20px;
   top: 10px;
+}
+
+.member-card_contact-picture {
+  vertical-align: top;
+}
+
+.member-card__contact-list {
+  display: inline-block;
+  margin: 0;
+  margin-left: 15px;
+  padding: 0;
+  vertical-align: top;
+}
+
+.member-card__contact-list-item {
+  display: block;
+  margin-bottom: 10px;
+  min-height: auto;
+  padding: 0;
+}
+
+.member-card__contact-list-item a {
+  color: #555;
+}
+
+.member-card__contact-list .mdl-list__item .mdl-list__item-primary-content .mdl-list__item-icon {
+  margin-right: 8px;
 }
