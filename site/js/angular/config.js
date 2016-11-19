@@ -7,6 +7,7 @@ function Config($locationProvider, $routeProvider) {
   $routeProvider.
     when('/', {
       controller:'HomeController as homeCtrl',
+      reloadOnSearch: false,
       templateUrl:'/templates/home.html',
     }).
     when('/members/:name/:memberId', {
