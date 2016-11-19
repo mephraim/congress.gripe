@@ -10,12 +10,30 @@ function MemberController($routeParams, MembersStoreService, PartyInfoService) {
   });
 }
 
+/**
+ * Get the member's full name.
+ * @return {String}
+ */
+MemberController.prototype.getMemberName = function() {
+  if (this.member) {
+    return this.member.person.firstname + ' ' + this.member.person.lastname;
+  }
+};
+
+/**
+ * Returns a background color class array for the member's party.
+ * @returns {String[]}
+ */
 MemberController.prototype.getPartyChipClass = function() {
   if (this.member) {
     return this.PartyInfoService.getPartyBackgroundColorForMember(this.member);
   }
 };
 
+/**
+ * Returns a single letter abbreviation for the member's party.
+ * @returns {String}
+ */
 MemberController.prototype.getPartyChipParty = function() {
   if (this.member) {
     return this.PartyInfoService.getPartyAbbreviationForMember(this.member);

@@ -8,6 +8,9 @@ require('angular').
   controller('MemberController',
     require('./controllers/member_controller.js')).
 
+  directive('hangoutButton',
+    require('./directives/hangout_button_directive.js')).
+
   service('HangoutService',
     require('./services/hangout_service.js')).
   service('MembersStoreService',

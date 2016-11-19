@@ -3,8 +3,14 @@
  */
 function HangoutService($window) {
   return {
-    renderButton: function(domId, phoneNumber) {
-      $window.gapi.hangout.render(domId, {
+    /**
+     * Renders a hangout button for the phone number.
+     *
+     * @param {String|Element} element The DOM node or ID where the button should go.
+     * @param {String} phoneNumber
+     */
+    renderButton: function(element, phoneNumber) {
+      $window.gapi.hangout.render(element, {
         'invites': [
           {
             id : phoneNumber,
@@ -12,7 +18,7 @@ function HangoutService($window) {
           }
         ],
         'render': 'createhangout',
-        'widget_size': 72
+        'widget_size': 136
       });
     }
   };
