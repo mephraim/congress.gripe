@@ -15,8 +15,8 @@
 
     <ul id="member-list">
       <li ng-repeat="member in membersCtrl.currentMembers">
-        {{member.firstname}}
-        {{member.lastname}}
+        {{member.person.firstname}}
+        {{member.person.lastname}}
         <button ng-click="membersCtrl.showMore(member)">
           More
         </button>

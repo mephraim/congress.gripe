@@ -26,6 +26,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: './site/index.html',
       to: 'index.html'
+    }, {
+      from: './data/congress_members.json',
+      to: 'data/congress_members.json'
     }]),
 
     new ExtractTextPlugin('assets/main.css'),
