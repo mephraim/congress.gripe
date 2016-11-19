@@ -1,11 +1,10 @@
 /**
  * @ngInject
  */
-function MembersController($http, $scope, $window, GovTrackService, HangoutService) {
+function MembersController($http, $scope, $window, HangoutService) {
   var self = this;
   self.$http = $http;
   self.$window = $window;
-  self.GovTrackService = GovTrackService;
   self.HangoutService = HangoutService;
 
   $scope.$watch(function() {
@@ -33,12 +32,6 @@ MembersController.prototype.closeMore = function() {
 };
 
 MembersController.prototype._search = function() {
-  var self = this;
-  self.GovTrackService.person({
-    'q': self.currentSearch
-  }).then(function(response) {
-    self.currentMembers = response.data.objects;
-  });
 };
 
 module.exports = MembersController;
