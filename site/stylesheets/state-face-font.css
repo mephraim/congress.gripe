@@ -1,0 +1,620 @@
+@font-face {
+  font-family: 'state-face-regular';
+  src: url('/assets/fonts/stateface-regular-webfont.eot');
+  src: url('/aseets/fonts/stateface-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/fonts/stateface-regular-webfont.woff') format('woff'),
+       url('/assets/fonts/stateface-regular-webfont.ttf') format('truetype'),
+       url('/assets/fonts/stateface-regular-webfont.svg#state-face-regular') format('svg');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+.state-face-replace.state-face-alabama,
+.state-face-replace.state-face-al,
+.state-face-replace.state-face-01, .state-face-replace.state-face-alaska,
+.state-face-replace.state-face-ak,
+.state-face-replace.state-face-02, .state-face-replace.state-face-arizona,
+.state-face-replace.state-face-az,
+.state-face-replace.state-face-04, .state-face-replace.state-face-arkansas,
+.state-face-replace.state-face-ar,
+.state-face-replace.state-face-05, .state-face-replace.state-face-california,
+.state-face-replace.state-face-ca,
+.state-face-replace.state-face-06, .state-face-replace.state-face-colorado,
+.state-face-replace.state-face-co,
+.state-face-replace.state-face-08, .state-face-replace.state-face-connecticut,
+.state-face-replace.state-face-ct,
+.state-face-replace.state-face-09, .state-face-replace.state-face-delaware,
+.state-face-replace.state-face-de,
+.state-face-replace.state-face-10, .state-face-replace.state-face-florida,
+.state-face-replace.state-face-fl,
+.state-face-replace.state-face-12, .state-face-replace.state-face-georgia,
+.state-face-replace.state-face-ga,
+.state-face-replace.state-face-13, .state-face-replace.state-face-hawaii,
+.state-face-replace.state-face-hi,
+.state-face-replace.state-face-15, .state-face-replace.state-face-idaho,
+.state-face-replace.state-face-id,
+.state-face-replace.state-face-16, .state-face-replace.state-face-illinois,
+.state-face-replace.state-face-il,
+.state-face-replace.state-face-17, .state-face-replace.state-face-indiana,
+.state-face-replace.state-face-in,
+.state-face-replace.state-face-18, .state-face-replace.state-face-iowa,
+.state-face-replace.state-face-ia,
+.state-face-replace.state-face-19, .state-face-replace.state-face-kansas,
+.state-face-replace.state-face-ks,
+.state-face-replace.state-face-20, .state-face-replace.state-face-kentucky,
+.state-face-replace.state-face-ky,
+.state-face-replace.state-face-21, .state-face-replace.state-face-louisiana,
+.state-face-replace.state-face-la,
+.state-face-replace.state-face-22, .state-face-replace.state-face-maine,
+.state-face-replace.state-face-me,
+.state-face-replace.state-face-23, .state-face-replace.state-face-maryland,
+.state-face-replace.state-face-md,
+.state-face-replace.state-face-24, .state-face-replace.state-face-massachusetts,
+.state-face-replace.state-face-ma,
+.state-face-replace.state-face-25, .state-face-replace.state-face-michigan,
+.state-face-replace.state-face-mi,
+.state-face-replace.state-face-26, .state-face-replace.state-face-minnesota,
+.state-face-replace.state-face-mn,
+.state-face-replace.state-face-27, .state-face-replace.state-face-mississippi,
+.state-face-replace.state-face-ms,
+.state-face-replace.state-face-28, .state-face-replace.state-face-missouri,
+.state-face-replace.state-face-mo,
+.state-face-replace.state-face-29, .state-face-replace.state-face-montana,
+.state-face-replace.state-face-mt,
+.state-face-replace.state-face-30, .state-face-replace.state-face-nebraska,
+.state-face-replace.state-face-ne,
+.state-face-replace.state-face-31, .state-face-replace.state-face-nevada,
+.state-face-replace.state-face-nv,
+.state-face-replace.state-face-32, .state-face-replace.state-face-new-hampshire,
+.state-face-replace.state-face-nh,
+.state-face-replace.state-face-33, .state-face-replace.state-face-new-jersey,
+.state-face-replace.state-face-nj,
+.state-face-replace.state-face-34, .state-face-replace.state-face-new-mexico,
+.state-face-replace.state-face-nm,
+.state-face-replace.state-face-35, .state-face-replace.state-face-new-york,
+.state-face-replace.state-face-ny,
+.state-face-replace.state-face-36, .state-face-replace.state-face-north-carolina,
+.state-face-replace.state-face-nc,
+.state-face-replace.state-face-37, .state-face-replace.state-face-north-dakota,
+.state-face-replace.state-face-nd,
+.state-face-replace.state-face-38, .state-face-replace.state-face-ohio,
+.state-face-replace.state-face-oh,
+.state-face-replace.state-face-39, .state-face-replace.state-face-oklahoma,
+.state-face-replace.state-face-ok,
+.state-face-replace.state-face-40, .state-face-replace.state-face-oregon,
+.state-face-replace.state-face-or,
+.state-face-replace.state-face-41, .state-face-replace.state-face-pennsylvania,
+.state-face-replace.state-face-pa,
+.state-face-replace.state-face-42, .state-face-replace.state-face-rhode-island,
+.state-face-replace.state-face-ri,
+.state-face-replace.state-face-44, .state-face-replace.state-face-south-carolina,
+.state-face-replace.state-face-sc,
+.state-face-replace.state-face-45, .state-face-replace.state-face-south-dakota,
+.state-face-replace.state-face-sd,
+.state-face-replace.state-face-46, .state-face-replace.state-face-tennessee,
+.state-face-replace.state-face-tn,
+.state-face-replace.state-face-47, .state-face-replace.state-face-texas,
+.state-face-replace.state-face-tx,
+.state-face-replace.state-face-48, .state-face-replace.state-face-utah,
+.state-face-replace.state-face-ut,
+.state-face-replace.state-face-49, .state-face-replace.state-face-vermont,
+.state-face-replace.state-face-vt,
+.state-face-replace.state-face-50, .state-face-replace.state-face-virginia,
+.state-face-replace.state-face-va,
+.state-face-replace.state-face-51, .state-face-replace.state-face-washington,
+.state-face-replace.state-face-wa,
+.state-face-replace.state-face-53, .state-face-replace.state-face-west-virginia,
+.state-face-replace.state-face-wv,
+.state-face-replace.state-face-54, .state-face-replace.state-face-wisconsin,
+.state-face-replace.state-face-wi,
+.state-face-replace.state-face-55, .state-face-replace.state-face-wyoming,
+.state-face-replace.state-face-wy,
+.state-face-replace.state-face-56, .state-face-replace.state-face-district-of-columbia,
+.state-face-replace.state-face-dc,
+.state-face-replace.state-face-11001, .state-face-replace.state-face-puerto-rico,
+.state-face-replace.state-face-pr,
+.state-face-replace.state-face-72, .state-face-replace.state-face-guam,
+.state-face-replace.state-face-gu,
+.state-face-replace.state-face-66 {
+  position: relative;
+  display: inline-block;
+  min-width: 1em;
+  text-indent: -999em; }
+  .state-face-replace.state-face-alabama:before,
+  .state-face-replace.state-face-al:before,
+  .state-face-replace.state-face-01:before, .state-face-replace.state-face-alaska:before,
+  .state-face-replace.state-face-ak:before,
+  .state-face-replace.state-face-02:before, .state-face-replace.state-face-arizona:before,
+  .state-face-replace.state-face-az:before,
+  .state-face-replace.state-face-04:before, .state-face-replace.state-face-arkansas:before,
+  .state-face-replace.state-face-ar:before,
+  .state-face-replace.state-face-05:before, .state-face-replace.state-face-california:before,
+  .state-face-replace.state-face-ca:before,
+  .state-face-replace.state-face-06:before, .state-face-replace.state-face-colorado:before,
+  .state-face-replace.state-face-co:before,
+  .state-face-replace.state-face-08:before, .state-face-replace.state-face-connecticut:before,
+  .state-face-replace.state-face-ct:before,
+  .state-face-replace.state-face-09:before, .state-face-replace.state-face-delaware:before,
+  .state-face-replace.state-face-de:before,
+  .state-face-replace.state-face-10:before, .state-face-replace.state-face-florida:before,
+  .state-face-replace.state-face-fl:before,
+  .state-face-replace.state-face-12:before, .state-face-replace.state-face-georgia:before,
+  .state-face-replace.state-face-ga:before,
+  .state-face-replace.state-face-13:before, .state-face-replace.state-face-hawaii:before,
+  .state-face-replace.state-face-hi:before,
+  .state-face-replace.state-face-15:before, .state-face-replace.state-face-idaho:before,
+  .state-face-replace.state-face-id:before,
+  .state-face-replace.state-face-16:before, .state-face-replace.state-face-illinois:before,
+  .state-face-replace.state-face-il:before,
+  .state-face-replace.state-face-17:before, .state-face-replace.state-face-indiana:before,
+  .state-face-replace.state-face-in:before,
+  .state-face-replace.state-face-18:before, .state-face-replace.state-face-iowa:before,
+  .state-face-replace.state-face-ia:before,
+  .state-face-replace.state-face-19:before, .state-face-replace.state-face-kansas:before,
+  .state-face-replace.state-face-ks:before,
+  .state-face-replace.state-face-20:before, .state-face-replace.state-face-kentucky:before,
+  .state-face-replace.state-face-ky:before,
+  .state-face-replace.state-face-21:before, .state-face-replace.state-face-louisiana:before,
+  .state-face-replace.state-face-la:before,
+  .state-face-replace.state-face-22:before, .state-face-replace.state-face-maine:before,
+  .state-face-replace.state-face-me:before,
+  .state-face-replace.state-face-23:before, .state-face-replace.state-face-maryland:before,
+  .state-face-replace.state-face-md:before,
+  .state-face-replace.state-face-24:before, .state-face-replace.state-face-massachusetts:before,
+  .state-face-replace.state-face-ma:before,
+  .state-face-replace.state-face-25:before, .state-face-replace.state-face-michigan:before,
+  .state-face-replace.state-face-mi:before,
+  .state-face-replace.state-face-26:before, .state-face-replace.state-face-minnesota:before,
+  .state-face-replace.state-face-mn:before,
+  .state-face-replace.state-face-27:before, .state-face-replace.state-face-mississippi:before,
+  .state-face-replace.state-face-ms:before,
+  .state-face-replace.state-face-28:before, .state-face-replace.state-face-missouri:before,
+  .state-face-replace.state-face-mo:before,
+  .state-face-replace.state-face-29:before, .state-face-replace.state-face-montana:before,
+  .state-face-replace.state-face-mt:before,
+  .state-face-replace.state-face-30:before, .state-face-replace.state-face-nebraska:before,
+  .state-face-replace.state-face-ne:before,
+  .state-face-replace.state-face-31:before, .state-face-replace.state-face-nevada:before,
+  .state-face-replace.state-face-nv:before,
+  .state-face-replace.state-face-32:before, .state-face-replace.state-face-new-hampshire:before,
+  .state-face-replace.state-face-nh:before,
+  .state-face-replace.state-face-33:before, .state-face-replace.state-face-new-jersey:before,
+  .state-face-replace.state-face-nj:before,
+  .state-face-replace.state-face-34:before, .state-face-replace.state-face-new-mexico:before,
+  .state-face-replace.state-face-nm:before,
+  .state-face-replace.state-face-35:before, .state-face-replace.state-face-new-york:before,
+  .state-face-replace.state-face-ny:before,
+  .state-face-replace.state-face-36:before, .state-face-replace.state-face-north-carolina:before,
+  .state-face-replace.state-face-nc:before,
+  .state-face-replace.state-face-37:before, .state-face-replace.state-face-north-dakota:before,
+  .state-face-replace.state-face-nd:before,
+  .state-face-replace.state-face-38:before, .state-face-replace.state-face-ohio:before,
+  .state-face-replace.state-face-oh:before,
+  .state-face-replace.state-face-39:before, .state-face-replace.state-face-oklahoma:before,
+  .state-face-replace.state-face-ok:before,
+  .state-face-replace.state-face-40:before, .state-face-replace.state-face-oregon:before,
+  .state-face-replace.state-face-or:before,
+  .state-face-replace.state-face-41:before, .state-face-replace.state-face-pennsylvania:before,
+  .state-face-replace.state-face-pa:before,
+  .state-face-replace.state-face-42:before, .state-face-replace.state-face-rhode-island:before,
+  .state-face-replace.state-face-ri:before,
+  .state-face-replace.state-face-44:before, .state-face-replace.state-face-south-carolina:before,
+  .state-face-replace.state-face-sc:before,
+  .state-face-replace.state-face-45:before, .state-face-replace.state-face-south-dakota:before,
+  .state-face-replace.state-face-sd:before,
+  .state-face-replace.state-face-46:before, .state-face-replace.state-face-tennessee:before,
+  .state-face-replace.state-face-tn:before,
+  .state-face-replace.state-face-47:before, .state-face-replace.state-face-texas:before,
+  .state-face-replace.state-face-tx:before,
+  .state-face-replace.state-face-48:before, .state-face-replace.state-face-utah:before,
+  .state-face-replace.state-face-ut:before,
+  .state-face-replace.state-face-49:before, .state-face-replace.state-face-vermont:before,
+  .state-face-replace.state-face-vt:before,
+  .state-face-replace.state-face-50:before, .state-face-replace.state-face-virginia:before,
+  .state-face-replace.state-face-va:before,
+  .state-face-replace.state-face-51:before, .state-face-replace.state-face-washington:before,
+  .state-face-replace.state-face-wa:before,
+  .state-face-replace.state-face-53:before, .state-face-replace.state-face-west-virginia:before,
+  .state-face-replace.state-face-wv:before,
+  .state-face-replace.state-face-54:before, .state-face-replace.state-face-wisconsin:before,
+  .state-face-replace.state-face-wi:before,
+  .state-face-replace.state-face-55:before, .state-face-replace.state-face-wyoming:before,
+  .state-face-replace.state-face-wy:before,
+  .state-face-replace.state-face-56:before, .state-face-replace.state-face-district-of-columbia:before,
+  .state-face-replace.state-face-dc:before,
+  .state-face-replace.state-face-11001:before, .state-face-replace.state-face-puerto-rico:before,
+  .state-face-replace.state-face-pr:before,
+  .state-face-replace.state-face-72:before, .state-face-replace.state-face-guam:before,
+  .state-face-replace.state-face-gu:before,
+  .state-face-replace.state-face-66:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-indent: 0; }
+.state-face-alabama:before,
+.state-face-al:before,
+.state-face-01:before, .state-face-alaska:before,
+.state-face-ak:before,
+.state-face-02:before, .state-face-arizona:before,
+.state-face-az:before,
+.state-face-04:before, .state-face-arkansas:before,
+.state-face-ar:before,
+.state-face-05:before, .state-face-california:before,
+.state-face-ca:before,
+.state-face-06:before, .state-face-colorado:before,
+.state-face-co:before,
+.state-face-08:before, .state-face-connecticut:before,
+.state-face-ct:before,
+.state-face-09:before, .state-face-delaware:before,
+.state-face-de:before,
+.state-face-10:before, .state-face-florida:before,
+.state-face-fl:before,
+.state-face-12:before, .state-face-georgia:before,
+.state-face-ga:before,
+.state-face-13:before, .state-face-hawaii:before,
+.state-face-hi:before,
+.state-face-15:before, .state-face-idaho:before,
+.state-face-id:before,
+.state-face-16:before, .state-face-illinois:before,
+.state-face-il:before,
+.state-face-17:before, .state-face-indiana:before,
+.state-face-in:before,
+.state-face-18:before, .state-face-iowa:before,
+.state-face-ia:before,
+.state-face-19:before, .state-face-kansas:before,
+.state-face-ks:before,
+.state-face-20:before, .state-face-kentucky:before,
+.state-face-ky:before,
+.state-face-21:before, .state-face-louisiana:before,
+.state-face-la:before,
+.state-face-22:before, .state-face-maine:before,
+.state-face-me:before,
+.state-face-23:before, .state-face-maryland:before,
+.state-face-md:before,
+.state-face-24:before, .state-face-massachusetts:before,
+.state-face-ma:before,
+.state-face-25:before, .state-face-michigan:before,
+.state-face-mi:before,
+.state-face-26:before, .state-face-minnesota:before,
+.state-face-mn:before,
+.state-face-27:before, .state-face-mississippi:before,
+.state-face-ms:before,
+.state-face-28:before, .state-face-missouri:before,
+.state-face-mo:before,
+.state-face-29:before, .state-face-montana:before,
+.state-face-mt:before,
+.state-face-30:before, .state-face-nebraska:before,
+.state-face-ne:before,
+.state-face-31:before, .state-face-nevada:before,
+.state-face-nv:before,
+.state-face-32:before, .state-face-new-hampshire:before,
+.state-face-nh:before,
+.state-face-33:before, .state-face-new-jersey:before,
+.state-face-nj:before,
+.state-face-34:before, .state-face-new-mexico:before,
+.state-face-nm:before,
+.state-face-35:before, .state-face-new-york:before,
+.state-face-ny:before,
+.state-face-36:before, .state-face-north-carolina:before,
+.state-face-nc:before,
+.state-face-37:before, .state-face-north-dakota:before,
+.state-face-nd:before,
+.state-face-38:before, .state-face-ohio:before,
+.state-face-oh:before,
+.state-face-39:before, .state-face-oklahoma:before,
+.state-face-ok:before,
+.state-face-40:before, .state-face-oregon:before,
+.state-face-or:before,
+.state-face-41:before, .state-face-pennsylvania:before,
+.state-face-pa:before,
+.state-face-42:before, .state-face-rhode-island:before,
+.state-face-ri:before,
+.state-face-44:before, .state-face-south-carolina:before,
+.state-face-sc:before,
+.state-face-45:before, .state-face-south-dakota:before,
+.state-face-sd:before,
+.state-face-46:before, .state-face-tennessee:before,
+.state-face-tn:before,
+.state-face-47:before, .state-face-texas:before,
+.state-face-tx:before,
+.state-face-48:before, .state-face-utah:before,
+.state-face-ut:before,
+.state-face-49:before, .state-face-vermont:before,
+.state-face-vt:before,
+.state-face-50:before, .state-face-virginia:before,
+.state-face-va:before,
+.state-face-51:before, .state-face-washington:before,
+.state-face-wa:before,
+.state-face-53:before, .state-face-west-virginia:before,
+.state-face-wv:before,
+.state-face-54:before, .state-face-wisconsin:before,
+.state-face-wi:before,
+.state-face-55:before, .state-face-wyoming:before,
+.state-face-wy:before,
+.state-face-56:before, .state-face-district-of-columbia:before,
+.state-face-dc:before,
+.state-face-11001:before, .state-face-puerto-rico:before,
+.state-face-pr:before,
+.state-face-72:before, .state-face-guam:before,
+.state-face-gu:before,
+.state-face-66:before {
+  display: inline-block;
+  margin-right: 5px;
+  font-family: 'state-face-regular';
+  font-style: normal;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  speak: none; }
+
+/* Icons */
+.state-face-alabama:before,
+.state-face-al:before,
+.state-face-01:before {
+  content: "B"; }
+
+.state-face-alaska:before,
+.state-face-ak:before,
+.state-face-02:before {
+  content: "A"; }
+
+.state-face-arizona:before,
+.state-face-az:before,
+.state-face-04:before {
+  content: "D"; }
+
+.state-face-arkansas:before,
+.state-face-ar:before,
+.state-face-05:before {
+  content: "C"; }
+
+.state-face-california:before,
+.state-face-ca:before,
+.state-face-06:before {
+  content: "E"; }
+
+.state-face-colorado:before,
+.state-face-co:before,
+.state-face-08:before {
+  content: "F"; }
+
+.state-face-connecticut:before,
+.state-face-ct:before,
+.state-face-09:before {
+  content: "G"; }
+
+.state-face-delaware:before,
+.state-face-de:before,
+.state-face-10:before {
+  content: "H"; }
+
+.state-face-florida:before,
+.state-face-fl:before,
+.state-face-12:before {
+  content: "I"; }
+
+.state-face-georgia:before,
+.state-face-ga:before,
+.state-face-13:before {
+  content: "J"; }
+
+.state-face-hawaii:before,
+.state-face-hi:before,
+.state-face-15:before {
+  content: "K"; }
+
+.state-face-idaho:before,
+.state-face-id:before,
+.state-face-16:before {
+  content: "M"; }
+
+.state-face-illinois:before,
+.state-face-il:before,
+.state-face-17:before {
+  content: "N"; }
+
+.state-face-indiana:before,
+.state-face-in:before,
+.state-face-18:before {
+  content: "O"; }
+
+.state-face-iowa:before,
+.state-face-ia:before,
+.state-face-19:before {
+  content: "L"; }
+
+.state-face-kansas:before,
+.state-face-ks:before,
+.state-face-20:before {
+  content: "P"; }
+
+.state-face-kentucky:before,
+.state-face-ky:before,
+.state-face-21:before {
+  content: "Q"; }
+
+.state-face-louisiana:before,
+.state-face-la:before,
+.state-face-22:before {
+  content: "R"; }
+
+.state-face-maine:before,
+.state-face-me:before,
+.state-face-23:before {
+  content: "U"; }
+
+.state-face-maryland:before,
+.state-face-md:before,
+.state-face-24:before {
+  content: "T"; }
+
+.state-face-massachusetts:before,
+.state-face-ma:before,
+.state-face-25:before {
+  content: "S"; }
+
+.state-face-michigan:before,
+.state-face-mi:before,
+.state-face-26:before {
+  content: "V"; }
+
+.state-face-minnesota:before,
+.state-face-mn:before,
+.state-face-27:before {
+  content: "W"; }
+
+.state-face-mississippi:before,
+.state-face-ms:before,
+.state-face-28:before {
+  content: "Y"; }
+
+.state-face-missouri:before,
+.state-face-mo:before,
+.state-face-29:before {
+  content: "X"; }
+
+.state-face-montana:before,
+.state-face-mt:before,
+.state-face-30:before {
+  content: "Z"; }
+
+.state-face-nebraska:before,
+.state-face-ne:before,
+.state-face-31:before {
+  content: "c"; }
+
+.state-face-nevada:before,
+.state-face-nv:before,
+.state-face-32:before {
+  content: "g"; }
+
+.state-face-new-hampshire:before,
+.state-face-nh:before,
+.state-face-33:before {
+  content: "d"; }
+
+.state-face-new-jersey:before,
+.state-face-nj:before,
+.state-face-34:before {
+  content: "e"; }
+
+.state-face-new-mexico:before,
+.state-face-nm:before,
+.state-face-35:before {
+  content: "f"; }
+
+.state-face-new-york:before,
+.state-face-ny:before,
+.state-face-36:before {
+  content: "h"; }
+
+.state-face-north-carolina:before,
+.state-face-nc:before,
+.state-face-37:before {
+  content: "a"; }
+
+.state-face-north-dakota:before,
+.state-face-nd:before,
+.state-face-38:before {
+  content: "b"; }
+
+.state-face-ohio:before,
+.state-face-oh:before,
+.state-face-39:before {
+  content: "i"; }
+
+.state-face-oklahoma:before,
+.state-face-ok:before,
+.state-face-40:before {
+  content: "j"; }
+
+.state-face-oregon:before,
+.state-face-or:before,
+.state-face-41:before {
+  content: "k"; }
+
+.state-face-pennsylvania:before,
+.state-face-pa:before,
+.state-face-42:before {
+  content: "l"; }
+
+.state-face-rhode-island:before,
+.state-face-ri:before,
+.state-face-44:before {
+  content: "m"; }
+
+.state-face-south-carolina:before,
+.state-face-sc:before,
+.state-face-45:before {
+  content: "n"; }
+
+.state-face-south-dakota:before,
+.state-face-sd:before,
+.state-face-46:before {
+  content: "o"; }
+
+.state-face-tennessee:before,
+.state-face-tn:before,
+.state-face-47:before {
+  content: "p"; }
+
+.state-face-texas:before,
+.state-face-tx:before,
+.state-face-48:before {
+  content: "q"; }
+
+.state-face-utah:before,
+.state-face-ut:before,
+.state-face-49:before {
+  content: "r"; }
+
+.state-face-vermont:before,
+.state-face-vt:before,
+.state-face-50:before {
+  content: "t"; }
+
+.state-face-virginia:before,
+.state-face-va:before,
+.state-face-51:before {
+  content: "s"; }
+
+.state-face-washington:before,
+.state-face-wa:before,
+.state-face-53:before {
+  content: "u"; }
+
+.state-face-west-virginia:before,
+.state-face-wv:before,
+.state-face-54:before {
+  content: "w"; }
+
+.state-face-wisconsin:before,
+.state-face-wi:before,
+.state-face-55:before {
+  content: "v"; }
+
+.state-face-wyoming:before,
+.state-face-wy:before,
+.state-face-56:before {
+  content: "x"; }
+
+.state-face-district-of-columbia:before,
+.state-face-dc:before,
+.state-face-11001:before {
+  content: "y"; }
+
+.state-face-puerto-rico:before,
+.state-face-pr:before,
+.state-face-72:before {
+  content: "3"; }
+
+.state-face-guam:before,
+.state-face-gu:before,
+.state-face-66:before {
+  content: "4"; }

@@ -29,6 +29,9 @@ module.exports = {
       from: './site/index.html',
       to: 'index.html'
     },{
+      from: './site/fonts',
+      to: 'assets/fonts/'
+    }, {
       from: './site/templates',
       to: 'templates'
     },{

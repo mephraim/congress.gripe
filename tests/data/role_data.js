@@ -57,7 +57,10 @@ module.exports = {
    "state": "MO",
    "title": "Sen.",
    "title_long": "Senator",
-   "website": "http://www.blunt.senate.gov"
+   "website": "http://www.blunt.senate.gov",
+   "customData": {
+     "fullStateName": "Iowa"
+   }
   },
   {
    "caucus": null,
@@ -111,7 +114,10 @@ module.exports = {
    "state": "AR",
    "title": "Sen.",
    "title_long": "Senator",
-   "website": "http://www.boozman.senate.gov"
+   "website": "http://www.boozman.senate.gov",
+   "customData": {
+     "fullStateName": "Minnesota"
+   }
   }
  ]
 };

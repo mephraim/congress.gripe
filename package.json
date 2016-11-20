@@ -3,7 +3,8 @@
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
     "fuse.js": "^2.5.0",
-    "material-design-lite": "^1.2.1"
+    "material-design-lite": "^1.2.1",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",

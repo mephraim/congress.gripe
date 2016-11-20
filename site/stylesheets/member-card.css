@@ -1,0 +1,77 @@
+#member-card {
+  position: relative;
+  margin: 150px auto;
+  width: 800px;
+}
+
+.member-card__title {
+  padding-bottom: 7px;
+}
+
+.member-card__party-chip {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.member-card_contact-picture {
+  vertical-align: top;
+}
+
+.member-card__phone {
+  display: inline-block;
+  margin-left: 3px;
+  vertical-align: top;
+}
+
+.member-card__phone-icon {
+  font-size: 120px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.member-card__hangout-button {
+  display: inline-block;
+  margin-top: 18px;
+}
+
+.member-card__hangout-button p {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 18px;
+  font-weight: 200;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.member-card__or {
+  display: inline-block;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 50px;
+  font-weight: 200;
+  margin: 40px 36px 0 32px;
+  text-transform: uppercase;
+}
+
+.member-card__contact-list {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+.member-card__contact-list-item {
+  display: block;
+  margin-bottom: 10px;
+  min-height: auto;
+  padding: 0;
+}
+
+.member-card__contact-list-item a {
+  color: #555;
+  font-weight: 200;
+  text-decoration: none;
+}
+
+.member-card__contact-list .mdl-list__item .mdl-list__item-primary-content .mdl-list__item-icon {
+  margin-right: 8px;
+}

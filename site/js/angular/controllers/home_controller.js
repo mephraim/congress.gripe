@@ -4,7 +4,7 @@ var MEMBER_URL_TEMPLATE = '/members/{{name}}/{{id}}';
 /**
  * @ngInject
  */
-function HomeController($interpolate, $http, $location, $scope, HangoutService, MembersStoreService, PartyInfoService) {
+function HomeController($interpolate, $http, $location, $scope, HangoutService, MembersStoreService, PartyInfoService, StateInfoService) {
   var self = this;
   self.$http = $http;
   self.$interpolate = $interpolate;
@@ -14,6 +14,7 @@ function HomeController($interpolate, $http, $location, $scope, HangoutService, 
   self.HangoutService = HangoutService;
   self.MembersStoreService = MembersStoreService;
   self.PartyInfoService = PartyInfoService;
+  self.StateInfoService = StateInfoService;
 
   self._initStartingQuery();
   self._initLocationUpdater();
@@ -47,17 +48,9 @@ HomeController.prototype.getPartyColorForMember = function(member) {
  * @returns {String[]}
  */
 HomeController.prototype.getSearchCardClass = function() {
-  if (this.currentMembers && this.currentMembers.length > 0) {
+  if (this.hasSearchResults()) {
     return ['collapsed'];
   }
-};
-
-/**
- * Is there a list of members being displayed?
- * @returns {Boolean}
- */
-HomeController.prototype.hasCurrentMembers = function() {
-  return this.currentMembers && this.currentMembers.length > 0;
 };
 
 /**
@@ -67,11 +60,58 @@ HomeController.prototype.hasCurrentMembers = function() {
  * @param {Event} $event
  */
 HomeController.prototype.handleSearchKeyup = function($event) {
-  if ($event.keyCode != ENTER_KEY_CODE || !this.hasCurrentMembers()) {
+  if ($event.keyCode != ENTER_KEY_CODE || !this.hasSearchResults()) {
     return;
   }
 
-  this.$location.url(this.getUrlForMember(this.currentMembers[0]));
+  this.$location.url(this.getUrlForMember(this.getSearchResults()[0]));
+};
+
+/**
+ * Are there search results to display?
+ * @returns {Boolean}
+ */
+HomeController.prototype.hasSearchResults = function() {
+  return this.getSearchResults().length > 0;
+};
+
+/**
+ * Returns the current list of search results.
+ * @returns {Object[]}
+ */
+HomeController.prototype.getSearchResults = function() {
+  return this._searchResults || [];
+};
+
+/**
+ * Returns a state name that should be displayed in the state header.
+ */
+HomeController.prototype.getStateForStateHeader = function() {
+  if (!this.currentSearch) {
+    return;
+  }
+
+  if (this.StateInfoService.isStateAbbreviation(this.currentSearch)) {
+    return this.StateInfoService.getName(this.currentSearch);
+  }
+
+  return this.currentSearch.charAt(0).toUpperCase() + this.currentSearch.slice(1);
+};
+
+/**
+ * Returns a class to be used with the state icon.
+ * @returns {String}
+ */
+HomeController.prototype.getStateIconClass = function() {
+  return this.currentSearch && this.StateInfoService.getFontClass(this.currentSearch);
+};
+
+/**
+ * Is the user searching for a state?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isCurrentSearchForState = function() {
+  return this.currentSearch && this.StateInfoService.isState(this.currentSearch);
 };
 
 /**
@@ -80,7 +120,7 @@ HomeController.prototype.handleSearchKeyup = function($event) {
 HomeController.prototype.search = function() {
   var self = this;
   self.MembersStoreService.search(this.currentSearch).then(function(members) {
-    self.currentMembers = members;
+    self._searchResults = members;
   });
 };
 
