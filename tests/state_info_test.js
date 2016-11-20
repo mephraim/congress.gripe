@@ -17,11 +17,11 @@ describe('StateInfo', function() {
 
   describe('getFontClass', function() {
     it('returns a font class for a state abbreviation', function() {
-      expect(StateInfo.getFontClass('ia')).toEqual('state-face-iowa');
+      expect(StateInfo.getFontClass('ia')).toEqual('state-face-ia');
     });
 
     it('returns a font class for a state name', function() {
-      expect(StateInfo.getFontClass('iowa')).toEqual('state-face-iowa');
+      expect(StateInfo.getFontClass('iowa')).toEqual('state-face-ia');
     });
   });
 

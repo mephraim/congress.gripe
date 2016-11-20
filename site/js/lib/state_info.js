@@ -100,8 +100,8 @@ function getFontClass(state) {
     return;
   }
 
-  if (isStateAbbreviation(state)) {
-    state = getName(state);
+  if (isStateName(state)) {
+    state = getAbbreviation(state);
   }
 
   return 'state-face-' + state.toLowerCase();

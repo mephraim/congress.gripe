@@ -1,14 +1,24 @@
 /**
  * @ngInject
  */
-function MemberController($routeParams, MembersStoreService, PartyInfoService) {
+function MemberController($routeParams, MembersStoreService, PartyInfoService, StateInfoService) {
   var self = this;
   self.PartyInfoService = PartyInfoService;
+  self.StateInfoService = StateInfoService;
 
   MembersStoreService.findById(parseInt($routeParams.memberId)).then(function(member) {
     self.member = member;
   });
 }
+
+/**
+ * Should the state chip be displayed?
+ * @returns {Boolean}
+ */
+MemberController.prototype.isStateChipVisible = function() {
+  return this.member &&
+         this.member.customData.fullStateName;
+};
 
 /**
  * Get the member's full name.
@@ -25,9 +35,8 @@ MemberController.prototype.getMemberName = function() {
  * @returns {String[]}
  */
 MemberController.prototype.getPartyChipClass = function() {
-  if (this.member) {
-    return this.PartyInfoService.getPartyBackgroundColorForMember(this.member);
-  }
+  return this.member &&
+         this.PartyInfoService.getPartyBackgroundColorForMember(this.member);
 };
 
 /**
@@ -35,9 +44,18 @@ MemberController.prototype.getPartyChipClass = function() {
  * @returns {String}
  */
 MemberController.prototype.getPartyChipParty = function() {
-  if (this.member) {
-    return this.PartyInfoService.getPartyAbbreviationForMember(this.member);
-  }
+  return this.member &&
+         this.PartyInfoService.getPartyAbbreviationForMember(this.member);
+};
+
+/**
+ * Returns a class that will be used for the state icon.
+ * @returns {String}
+ */
+MemberController.prototype.getStateChipIconClass = function() {
+  return this.member &&
+         this.member.customData.fullStateName &&
+         this.StateInfoService.getFontClass(this.member.customData.fullStateName);
 };
 
 module.exports = MemberController;

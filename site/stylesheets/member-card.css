@@ -8,10 +8,16 @@
   padding-bottom: 7px;
 }
 
-.member-card__party-chip {
+.member-card__chips {
   position: absolute;
   right: 20px;
   top: 10px;
+}
+
+.member-card__state-chip-icon {
+  font-size: 21px;
+  left: 3px;
+  position: relative;
 }
 
 .member-card_contact-picture {
@@ -44,12 +50,21 @@
 }
 
 .member-card__or {
+  background: #dedede;
+  border-radius: 50%;
+  color: #888;
   display: inline-block;
   font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 50px;
+  font-size: 41px;
+  font-style: italic;
   font-weight: 200;
-  margin: 40px 36px 0 32px;
+  height: 80px;
+  line-height: 80px;
+  margin: 10px;
+  text-align: center;
+  text-indent: -10px;
   text-transform: uppercase;
+  width: 80px;
 }
 
 .member-card__contact-list {

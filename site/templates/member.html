@@ -5,15 +5,28 @@
       {{memberCtrl.getMemberName()}}
     </h1>
 
-    <span class="mdl-chip mdl-chip--contact member-card__party-chip">
-      <span class="mdl-chip__contact mdl-color--red mdl-color-text--white"
-            ng-class="memberCtrl.getPartyChipClass()">
-        {{memberCtrl.getPartyChipParty()}}
+    <div class="member-card__chips">
+      <span class="mdl-chip mdl-chip--contact member-card__state-chip"
+            ng-if="memberCtrl.isStateChipVisible()">
+        <span class="mdl-chip__contact mdl-color--cyan-800 mdl-color-text--white">
+          <i class="member-card__state-chip-icon"
+            ng-class="memberCtrl.getStateChipIconClass()"></i>
+        </span>
+        <span class="mdl-chip__text">
+          {{memberCtrl.member.customData.fullStateName}}
+        </span>
       </span>
-      <span class="mdl-chip__text">
-        {{memberCtrl.member.title_long}}
+
+      <span class="mdl-chip mdl-chip--contact member-card__party-chip">
+        <span class="mdl-chip__contact mdl-color-text--white"
+              ng-class="memberCtrl.getPartyChipClass()">
+          {{memberCtrl.getPartyChipParty()}}
+        </span>
+        <span class="mdl-chip__text">
+          {{memberCtrl.member.title_long}}
+        </span>
       </span>
-    </span>
+    </div>
   </div>
 
   <div class="mdl-card__supporting-text">
