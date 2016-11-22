@@ -26,8 +26,12 @@ module.exports = {
   plugins: [
     // Copy static aassets into the build directory
     new CopyWebpackPlugin([{
-      from: './site/index.html',
-      to: 'index.html'
+      from: './site/CNAME',
+      to: 'CNAME',
+      toType: 'file'
+    },{
+      from: './site/*.html',
+      to: '[name].html'
     },{
       from: './site/fonts',
       to: 'assets/fonts/'
@@ -47,7 +51,7 @@ module.exports = {
 
     // Optimize using Uglify
     new webpack.optimize.UglifyJsPlugin({
-      compress: true 
+      compress: true
     })
   ],
 

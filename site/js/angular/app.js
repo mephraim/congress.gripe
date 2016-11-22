@@ -2,6 +2,7 @@ require('angular').
   module('CongressApp', [require('angular-route')]).
 
   config(require('./config.js')).
+  run(require('./run.js')).
 
   controller('HomeController',
     require('./controllers/home_controller.js')).

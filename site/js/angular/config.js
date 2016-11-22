@@ -8,14 +8,16 @@ function Config($locationProvider, $routeProvider) {
     when('/', {
       controller:'HomeController as homeCtrl',
       reloadOnSearch: false,
-      templateUrl:'/templates/home.html',
+      templateUrl: '/templates/home.html',
     }).
+
     when('/members/:name/:memberId', {
-      controller:'MemberController as memberCtrl',
-      templateUrl:'/templates/member.html'
+      controller: 'MemberController as memberCtrl',
+      templateUrl: '/templates/member.html'
     }).
+
     otherwise({
-      redirectTo:'/'
+      redirectTo: ''
     });
 }
 
