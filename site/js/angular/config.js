@@ -16,6 +16,11 @@ function Config($locationProvider, $routeProvider) {
       templateUrl: '/templates/member.html'
     }).
 
+    when('/states/:name', {
+      controller: 'StateController as stateCtrl',
+      templateUrl: '/templates/state.html'
+    }).
+
     otherwise({
       redirectTo: ''
     });

@@ -8,6 +8,8 @@ require('angular').
     require('./controllers/home_controller.js')).
   controller('MemberController',
     require('./controllers/member_controller.js')).
+  controller('StateController',
+    require('./controllers/state_controller.js')).
 
   directive('hangoutButton',
     require('./directives/hangout_button_directive.js')).

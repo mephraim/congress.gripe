@@ -16,6 +16,9 @@ function MembersStore(data) {
   this._loadData(data);
 }
 
+MembersStore.ROLE_TYPE_REPRESENTATIVE = ROLE_TYPE_REPRESENTATIVE;
+MembersStore.ROLE_TYPE_SENATOR = ROLE_TYPE_SENATOR;
+
 /**
  * Find a member by their govtrack ID.
  *
@@ -25,6 +28,27 @@ function MembersStore(data) {
 MembersStore.prototype.findById = function(id) {
   return _.find(this._members, function(member) {
     return member.person.id === id;
+  });
+};
+
+/**
+ * Find all of the senators and representatives for a state.
+ *
+ * @param {String} state
+ * @param {String?} roleType
+ * @return {Object[]}
+ */
+MembersStore.prototype.findAllForState = function(state, roleType) {
+  if (stateInfo.isStateName(state)) {
+    state = stateInfo.getAbbreviation(state);
+  }
+
+  return _.filter(this._members, function(member) {
+    return (member.state &&
+            (member.state.toLowerCase() === state.toLowerCase())) &&
+
+           // Only take role type into consideration if one was passed in.
+           (!roleType || (member.role_type == roleType));
   });
 };
 
@@ -105,28 +129,10 @@ MembersStore.prototype.isValidNameSearch = function(query) {
  */
 MembersStore.prototype.search = function(query) {
   if (stateInfo.isState(query.trim())) {
-    return this.searchByState(query);
+    return this.findAllForState(query);
   }
 
   return this._memberFuse.search(query);
-};
-
-/**
- * Search for members who match the state.
- *
- * @param {String} state
- * @return {Object[]}
- */
-MembersStore.prototype.searchByState = function(state) {
-  if (stateInfo.isStateAbbreviation(state)) {
-    state = stateInfo.getName(state);
-  }
-
-  return _.filter(this._members, function(member) {
-    return member.customData.fullStateName &&
-           (member.customData.fullStateName.toLowerCase() ===
-            state.toLowerCase());
-  });
 };
 
 /**

@@ -6,12 +6,20 @@ describe('StateInfo', function() {
       expect(StateInfo.getAbbreviation('Iowa')).toEqual('IA');
       expect(StateInfo.getAbbreviation('California')).toEqual('CA');
     });
+
+    it('returns the same string if the state was already and abbreviation', function() {
+      expect(StateInfo.getAbbreviation('IA')).toEqual('IA');
+    });
   });
 
   describe('getName', function() {
     it('returns the full name of a state based on the abbreviation', function() {
       expect(StateInfo.getName('IA')).toEqual('Iowa');
       expect(StateInfo.getName('CA')).toEqual('California');
+    });
+
+    it('returns the same string if the state was already a name', function() {
+      expect(StateInfo.getName('Iowa')).toEqual('Iowa');
     });
   });
 

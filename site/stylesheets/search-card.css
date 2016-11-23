@@ -41,6 +41,12 @@
   text-align: center;
 }
 
+
+.search-card__search-results-header a {
+  color: #fff;
+  font-weight: 200;
+}
+
 .search-card__search-results-header .search-card__state-icon {
   font-size: 50px;
   position: relative;

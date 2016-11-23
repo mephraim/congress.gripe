@@ -1,0 +1,24 @@
+<section class="member-list">
+  <div class="member-list__header-card mdl-card mdl-shadow--2dp mdl-color--cyan-800">
+    <div class="mdl-card__title member-list__header-card-title">
+      <h2 class="mdl-card__title-text">
+        <i class="member-list__state-icon"
+           ng-class="stateCtrl.getStateIconClass()"></i>
+        {{stateCtrl.getStateName()}} Senators
+      </h2>
+    </div>
+  </div>
+
+  <member-card member="senator" ng-repeat="senator in stateCtrl.senators"></member-card>
+
+  <div class="member-list__header-card mdl-card mdl-shadow--2dp mdl-color--cyan-800">
+    <div class="mdl-card__title member-list__header-card-title">
+      <h2 class="mdl-card__title-text">
+        <i class="member-list__state-icon"
+           ng-class="stateCtrl.getStateIconClass()"></i>
+        {{stateCtrl.getStateName()}} Representatives
+      </h2>
+    </div>
+  </div>
+  <member-card member="representative" ng-repeat="representative in stateCtrl.representatives"></member-card>
+</section>

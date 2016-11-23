@@ -78,6 +78,10 @@ module.exports = {
   * @returns {String}
   */
 function getAbbreviation(name) {
+  if (isStateAbbreviation(name)) {
+    return name;
+  }
+
   var found = _.find(STATE_INFO, function(state) {
     return state.name.toLowerCase() ==
            name.toLowerCase().trim();
@@ -114,13 +118,17 @@ function getFontClass(state) {
   * @returns {String}
   */
 function getName(abbreviation) {
-  var found = _.find(STATE_INFO, function(state) {
-    return state.abbreviation.toLowerCase() ==
-           abbreviation.toLowerCase().trim();
-  });
+  if (isStateName(abbreviation)) {
+    return abbreviation.charAt(0).toUpperCase() + abbreviation.slice(1);
+  } else {
+    var found = _.find(STATE_INFO, function(state) {
+      return state.abbreviation.toLowerCase() ==
+            abbreviation.toLowerCase().trim();
+    });
 
-  if (found) {
-    return found.name;
+    if (found) {
+      return found.name;
+    }
   }
 }
 

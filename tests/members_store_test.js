@@ -6,6 +6,44 @@ describe('MembersStore', function() {
     subject = new MembersStore(require('./data/role_data.js'));
   });
 
+  describe('findAllForState', function() {
+    it('finds all members for a full state name', function() {
+      var found = subject.findAllForState('Iowa');
+      expect(found.map(function(member) {
+        return member.person.id;
+      }).sort()).toEqual([400034, 400080, 400090]);
+
+      var found = subject.findAllForState('Minnesota');
+      expect(found.map(function(member) {
+        return member.person.id;
+      }).sort()).toEqual([400040]);
+    });
+
+    it('finds all members for a state abbreviation', function() {
+      var found = subject.findAllForState('IA');
+      expect(found.map(function(member) {
+        return member.person.id;
+      }).sort()).toEqual([400034, 400080, 400090]);
+
+      var found = subject.findAllForState('Minnesota');
+      expect(found.map(function(member) {
+        return member.person.id;
+      }).sort()).toEqual([400040]);
+    });
+
+    it('finds all members for a role type', function() {
+      var found = subject.findAllForState('Iowa', MembersStore.ROLE_TYPE_REPRESENTATIVE);
+      expect(found.map(function(member) {
+        return member.person.id;
+      }).sort()).toEqual([400034]);
+
+      var found = subject.findAllForState('Iowa', MembersStore.ROLE_TYPE_SENATOR);
+      expect(found.map(function(member) {
+        return member.person.id;
+      }).sort()).toEqual([400080, 400090]);
+    });
+  });
+
   describe('findAllForDistrict', function() {
     it('finds the senators and representatives for a state congressional district', function() {
       var found = subject.findAllForDistrict('IA', 22);
@@ -20,7 +58,7 @@ describe('MembersStore', function() {
       var ronald = subject.findRepresentativeForDistrict('IA', 22);
       expect(ronald.person.id).toEqual(400034);
 
-      var hillary = subject.findRepresentativeForDistrict('AR', 2);
+      var hillary = subject.findRepresentativeForDistrict('MN', 2);
       expect(hillary.person.id).toEqual(400040);
     });
   });
@@ -94,30 +132,6 @@ describe('MembersStore', function() {
 
       var hillaries = subject.search('Clinton');
       expect(hillaries[0].person.firstname).toEqual('Hillary');
-    });
-
-    it('finds a member by their full state name', function() {
-      var ronald = subject.search('Iowa')[0];
-      expect(ronald.person.id).toEqual(400034);
-      expect(ronald.person.firstname).toEqual('Ronald');
-      expect(ronald.person.lastname).toEqual('McDonald');
-
-      var hillary = subject.search('Minnesota')[0];
-      expect(hillary.person.id).toEqual(400040);
-      expect(hillary.person.firstname).toEqual('Hillary');
-      expect(hillary.person.lastname).toEqual('Clinton');
-    });
-
-    it('finds a member by their state abbreviation', function() {
-      var ronald = subject.search('ia')[0];
-      expect(ronald.person.id).toEqual(400034);
-      expect(ronald.person.firstname).toEqual('Ronald');
-      expect(ronald.person.lastname).toEqual('McDonald');
-
-      var hillary = subject.search('MN')[0];
-      expect(hillary.person.id).toEqual(400040);
-      expect(hillary.person.firstname).toEqual('Hillary');
-      expect(hillary.person.lastname).toEqual('Clinton');
     });
   });
 });

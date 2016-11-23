@@ -103,9 +103,7 @@ HomeController.prototype.getCongressionalDistrictHeader = function() {
     return;
   }
 
-  var name = this.StateInfoService.getName(this.currentCongressionalDistrict.state);
-  var possessive = name.slice(-1) == 's' ? "'" : "'s";
-  return [name + possessive,
+  return [this.StateInfoService.getName(this.currentCongressionalDistrict.state),
           this.currentCongressionalDistrict.name].join(' ');
 };
 
@@ -117,11 +115,7 @@ HomeController.prototype.getStateForStateHeader = function() {
     return;
   }
 
-  if (this.StateInfoService.isStateAbbreviation(this.currentSearch)) {
-    return this.StateInfoService.getName(this.currentSearch);
-  }
-
-  return this.currentSearch.charAt(0).toUpperCase() + this.currentSearch.slice(1);
+  return this.StateInfoService.getName(this.currentSearch.trim());
 };
 
 /**

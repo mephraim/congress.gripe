@@ -1,7 +1,6 @@
 .member-card {
   position: relative;
-  margin: 150px auto;
-  width: 800px;
+  width: 100%;
 }
 
 .member-card__title {
@@ -12,6 +11,15 @@
   position: absolute;
   right: 20px;
   top: 10px;
+}
+
+.member-card__state-chip a {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 200;
+}
+
+.member-card__state-chip a:hover {
+  font-weight: 500;
 }
 
 .member-card__state-chip-icon {

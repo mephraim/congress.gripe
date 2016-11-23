@@ -18,7 +18,8 @@
        ng-show="homeCtrl.isCurrentSearchForState()">
     <i class="search-card__state-icon"
        ng-class="homeCtrl.getStateIconClass()"></i>
-    All Senators and Representatives for {{homeCtrl.getStateForStateHeader()}}
+    All Senators and Representatives for
+    <a href="/states/{{homeCtrl.getStateForStateHeader().toLowerCase()}}">{{homeCtrl.getStateForStateHeader()}}</a>
   </div>
 
   <div class="search-card__search-results-header mdl-color--cyan-800"

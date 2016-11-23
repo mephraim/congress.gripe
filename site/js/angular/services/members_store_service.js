@@ -14,6 +14,9 @@ function MembersStoreService($http, $q) {
   });
 
   return {
+    ROLE_TYPE_REPRESENTATIVE: MembersStore.ROLE_TYPE_REPRESENTATIVE,
+    ROLE_TYPE_SENATOR: MembersStore.ROLE_TYPE_SENATOR,
+
     /**
      * Find a member by their govtrack ID.
      *
@@ -27,6 +30,25 @@ function MembersStoreService($http, $q) {
         } else {
           httpPromise.then(function() {
             resolve(store.findById(id));
+          });
+        }
+      });
+    },
+
+    /**
+     * Find all senators or representatives for a state
+     *
+     * @param {String} state
+     * @param {String?} roleType
+     * @returns {Promise}
+     */
+    findAllForState: function(state, roleType) {
+      return $q(function(resolve, reject) {
+        if (store) {
+          resolve(store.findAllForState(state, roleType));
+        } else {
+          httpPromise.then(function() {
+            resolve(store.findAllForState(state, roleType));
           });
         }
       });

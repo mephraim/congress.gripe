@@ -111,7 +111,7 @@ module.exports = {
    "senator_rank": "senior",
    "senator_rank_label": "Senior",
    "startdate": "2011-01-05",
-   "state": "AR",
+   "state": "MN",
    "title": "Rep.",
    "title_long": "Representative",
    "website": "http://www.boozman.senate.gov",

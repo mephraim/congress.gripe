@@ -7,13 +7,15 @@
     <div class="member-card__chips">
       <span class="mdl-chip mdl-chip--contact member-card__state-chip"
             ng-if="memberCardCtrl.isStateChipVisible()">
-        <span class="mdl-chip__contact mdl-color--cyan-800 mdl-color-text--white">
-          <i class="member-card__state-chip-icon"
-            ng-class="memberCardCtrl.getStateChipIconClass()"></i>
-        </span>
-        <span class="mdl-chip__text">
-          {{memberCardCtrl.member().customData.fullStateName}}
-        </span>
+        <a href="/states/{{memberCardCtrl.member().customData.fullStateName.toLowerCase()}}">
+          <span class="mdl-chip__contact mdl-color--cyan-800 mdl-color-text--white">
+            <i class="member-card__state-chip-icon"
+              ng-class="memberCardCtrl.getStateChipIconClass()"></i>
+          </span>
+          <span class="mdl-chip__text">
+            {{memberCardCtrl.member().customData.fullStateName}}
+          </span>
+        </a>
       </span>
 
       <span class="mdl-chip mdl-chip--contact member-card__party-chip">
@@ -78,11 +80,5 @@
     <p>
       <span id="hangout-placeholder"></span>
     </p>
-  </div>
-
-  <div class="mdl-card__actions mdl-card--border">
-    <a href="/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-      Search again
-    </a>
   </div>
 </div>
