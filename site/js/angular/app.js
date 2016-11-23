@@ -11,6 +11,8 @@ require('angular').
 
   directive('hangoutButton',
     require('./directives/hangout_button_directive.js')).
+  directive('memberCard',
+    require('./directives/member_card/directive.js')).
 
   service('CensusService',
     require('./services/census_service.js')).

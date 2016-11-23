@@ -1,6 +1,3 @@
-var MIN_ADDRESS_SEARCH_LENGTH = 3;
-var MAX_NAME_SEARCH_LENGTH = 4;
-
 var ENTER_KEY_CODE = 13;
 var MEMBER_URL_TEMPLATE = '/members/{{name}}/{{id}}';
 

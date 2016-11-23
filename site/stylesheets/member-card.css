@@ -1,11 +1,11 @@
-#member-card {
+.member-card {
   position: relative;
   margin: 150px auto;
   width: 800px;
 }
 
 .member-card__title {
-  padding-bottom: 7px;
+  background: #fafafa;
 }
 
 .member-card__chips {
@@ -28,6 +28,11 @@
   display: inline-block;
   margin-left: 3px;
   vertical-align: top;
+  transition: color .3s;
+}
+
+.member-card__phone:hover {
+  color: #555;
 }
 
 .member-card__phone-icon {
@@ -38,15 +43,15 @@
 
 .member-card__hangout-button {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 4px;
 }
 
 .member-card__hangout-button p {
   font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 200;
-  margin: 0;
-  margin-bottom: 5px;
+  margin: 5px 0;
+  text-align: center;
 }
 
 .member-card__or {
