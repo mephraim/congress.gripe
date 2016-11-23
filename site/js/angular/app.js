@@ -12,6 +12,8 @@ require('angular').
   directive('hangoutButton',
     require('./directives/hangout_button_directive.js')).
 
+  service('CensusService',
+    require('./services/census_service.js')).
   service('HangoutService',
     require('./services/hangout_service.js')).
   service('MembersStoreService',

@@ -1,20 +1,31 @@
-<div id="search-card"
-     class="mdl-card mdl-shadow--2dp"
+<div class="search-card mdl-card mdl-shadow--2dp"
      ng-class="homeCtrl.getSearchCardClass()">
 
-  <input id="search-card__search-box"
-         class="mdl-textfield__input"
-         type="text"
-         placeholder="Find a member of congress"
-         ng-change="homeCtrl.search()"
-         ng-keyup="homeCtrl.handleSearchKeyup($event)"
-         ng-model="homeCtrl.currentSearch">
+  <div class="search-card__search-box-container">
+    <input class="search-card__search-box mdl-textfield__input"
+           autofocus
+           type="text"
+           placeholder="Find a member of congress"
+           ng-change="homeCtrl.search()"
+           ng-keyup="homeCtrl.handleSearchKeyup($event)"
+           ng-model="homeCtrl.currentSearch">
+
+    <div class="search-card__loading-indicator mdl-spinner mdl-spinner--single-color mdl-js-spinner"
+         ng-class="homeCtrl.getLoadingIndicatorClass()"></div>
+  </div>
 
   <div class="search-card__search-results-header mdl-color--cyan-800"
        ng-show="homeCtrl.isCurrentSearchForState()">
     <i class="search-card__state-icon"
        ng-class="homeCtrl.getStateIconClass()"></i>
-    All representatives for {{homeCtrl.getStateForStateHeader()}}
+    All Senators and Representatives for {{homeCtrl.getStateForStateHeader()}}
+  </div>
+
+  <div class="search-card__search-results-header mdl-color--cyan-800"
+       ng-show="homeCtrl.currentCongressionalDistrict">
+    <i class="search-card__state-icon"
+       ng-class="homeCtrl.getStateIconClass()"></i>
+    Senators and Representatives for {{homeCtrl.getCongressionalDistrictHeader()}}
   </div>
 
   <ul class="mdl-list search-card__search-results"

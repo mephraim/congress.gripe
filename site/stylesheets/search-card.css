@@ -1,15 +1,27 @@
-#search-card {
+.search-card {
   margin: 300px auto;
   min-height: auto;
   transition: margin .2s;
   width: 800px;
 }
 
-#search-card.collapsed {
+.search-card.collapsed {
   margin-top: 20px;
 }
 
-#search-card__search-box {
+.search-card__loading-indicator {
+  height: 40px;
+  position: absolute;
+  right: 23px;
+  top: 17px;
+  width: 40px;
+}
+
+.search-card__search-box-container {
+  position: relative;
+}
+
+.search-card__search-box {
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-size: 40px;
   font-weight: 200;
@@ -59,4 +71,3 @@
 .search-card__search-result .mdl-list__item-primary-content .mdl-list__item-icon {
   margin-right: 10px;
 }
-

@@ -1,12 +1,14 @@
+var MIN_ADDRESS_SEARCH_LENGTH = 3;
+var MAX_NAME_SEARCH_LENGTH = 4;
+
 var ENTER_KEY_CODE = 13;
 var MEMBER_URL_TEMPLATE = '/members/{{name}}/{{id}}';
 
 /**
  * @ngInject
  */
-function HomeController($interpolate, $http, $location, $scope, HangoutService, MembersStoreService, PartyInfoService, StateInfoService) {
+function HomeController($interpolate, $location, $scope, CensusService, HangoutService, MembersStoreService, PartyInfoService, StateInfoService) {
   var self = this;
-  self.$http = $http;
   self.$interpolate = $interpolate;
   self.$location = $location;
   self.$scope = $scope;
@@ -15,10 +17,22 @@ function HomeController($interpolate, $http, $location, $scope, HangoutService, 
   self.MembersStoreService = MembersStoreService;
   self.PartyInfoService = PartyInfoService;
   self.StateInfoService = StateInfoService;
+  self.CensusService = CensusService;
 
   self._initStartingQuery();
   self._initLocationUpdater();
 }
+
+/**
+ * Returns a class array for the loading indicator.
+ *
+ * @return {String[]}
+ */
+HomeController.prototype.getLoadingIndicatorClass = function() {
+  if (this._searchInProgress) {
+    return ['is-active'];
+  }
+};
 
 /**
  * Builds a url for the member's profile page.
@@ -60,11 +74,11 @@ HomeController.prototype.getSearchCardClass = function() {
  * @param {Event} $event
  */
 HomeController.prototype.handleSearchKeyup = function($event) {
-  if ($event.keyCode != ENTER_KEY_CODE || !this.hasSearchResults()) {
-    return;
-  }
+  delete this.currentCongressionalDistrict;
 
-  this.$location.url(this.getUrlForMember(this.getSearchResults()[0]));
+  if ($event.keyCode == ENTER_KEY_CODE && this.hasSearchResults()) {
+    this.$location.url(this.getUrlForMember(this.getSearchResults()[0]));
+  }
 };
 
 /**
@@ -81,6 +95,21 @@ HomeController.prototype.hasSearchResults = function() {
  */
 HomeController.prototype.getSearchResults = function() {
   return this._searchResults || [];
+};
+
+/**
+ * Returns the text for congressional district header.
+ * @returns {String}
+ */
+HomeController.prototype.getCongressionalDistrictHeader = function() {
+  if (!this.currentCongressionalDistrict) {
+    return;
+  }
+
+  var name = this.StateInfoService.getName(this.currentCongressionalDistrict.state);
+  var possessive = name.slice(-1) == 's' ? "'" : "'s";
+  return [name + possessive,
+          this.currentCongressionalDistrict.name].join(' ');
 };
 
 /**
@@ -103,7 +132,12 @@ HomeController.prototype.getStateForStateHeader = function() {
  * @returns {String}
  */
 HomeController.prototype.getStateIconClass = function() {
-  return this.currentSearch && this.StateInfoService.getFontClass(this.currentSearch);
+  if (this.currentCongressionalDistrict) {
+    return this.StateInfoService.getFontClass(this.currentCongressionalDistrict.state);
+  }
+
+  return this.currentSearch &&
+         this.StateInfoService.getFontClass(this.currentSearch);
 };
 
 /**
@@ -111,7 +145,8 @@ HomeController.prototype.getStateIconClass = function() {
  * @returns {Boolean}
  */
 HomeController.prototype.isCurrentSearchForState = function() {
-  return this.currentSearch && this.StateInfoService.isState(this.currentSearch);
+  return this.currentSearch &&
+         this.StateInfoService.isState(this.currentSearch);
 };
 
 /**
@@ -119,9 +154,40 @@ HomeController.prototype.isCurrentSearchForState = function() {
  */
 HomeController.prototype.search = function() {
   var self = this;
-  self.MembersStoreService.search(this.currentSearch).then(function(members) {
-    self._searchResults = members;
-  });
+  if (!this._hasCurrentSearch()) {
+    delete self._searchResults;
+    return;
+  }
+
+  if (self.MembersStoreService.isValidNameSearch(self.currentSearch)) {
+    self.MembersStoreService.search(self.currentSearch).then(function(members) {
+      self._searchResults = members;
+    });
+  }
+
+  if (self.MembersStoreService.isValidAddressSearch(self.currentSearch)) {
+    self._searchInProgress = true;
+    self.CensusService.getCongressionalDistrict(self.currentSearch).then(function(response) {
+      self._searchInProgress = false;
+
+      if (response) {
+        self.currentCongressionalDistrict = response;
+        self.MembersStoreService.findAllForDistrict(response.state, response.number).then(function(members) {
+          self._searchResults = members;
+        });
+      } else {
+        delete self.currentCongressionalDistrict;
+      }
+    });
+  }
+};
+
+/**
+ * Is there a search term in the search box?
+ * @returns {Boolean}
+ */
+HomeController.prototype._hasCurrentSearch = function() {
+  return this.currentSearch && this.currentSearch.trim().length > 0;
 };
 
 /**

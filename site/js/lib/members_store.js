@@ -2,6 +2,12 @@ var _ = require('underscore');
 var stateInfo = require('./state_info.js');
 var Fuse = require('fuse.js');
 
+var MIN_ADDRESS_SEARCH_LENGTH = 3;
+var MAX_NAME_SEARCH_LENGTH = 4;
+
+var ROLE_TYPE_REPRESENTATIVE = 'representative';
+var ROLE_TYPE_SENATOR = 'senator';
+
 /**
  * A wrapper class that builds a collection for searching members of congress.
  * @constructor
@@ -20,6 +26,75 @@ MembersStore.prototype.findById = function(id) {
   return _.find(this._members, function(member) {
     return member.person.id === id;
   });
+};
+
+/**
+ * Find the senators and representatives for a district.
+ *
+ * @param {String} state
+ * @param {Number} district
+ * @returns {Object[]}
+ */
+MembersStore.prototype.findAllForDistrict = function(state, district) {
+  return this.findSenatorsForState(state).concat(
+           this.findRepresentativeForDistrict(state, district));
+};
+
+/**
+ * Find the representative for a specific district.
+ *
+ * @param {String} state
+ * @param {Number} district
+ * @returns {Object}
+ */
+MembersStore.prototype.findRepresentativeForDistrict = function(state, district) {
+  return _.find(this._members, function(member) {
+    return member.role_type == ROLE_TYPE_REPRESENTATIVE &&
+           member.state === state &&
+           member.district === district;
+  });
+};
+
+/**
+ * Find the senators for the state.
+ *
+ * @param {String} state
+ * @returns {Object[]}
+ */
+MembersStore.prototype.findSenatorsForState = function(state) {
+  return _.filter(this._members, function(member) {
+    return member.role_type === ROLE_TYPE_SENATOR &&
+           member.state === state;
+  });
+};
+
+/**
+ * Can this query be used to search for an address?
+ * The Geolocation API requires a minimum number of words to successfully search
+ * for an address.
+ *
+ * @param {String} query
+ * @returns {Boolean}
+ */
+MembersStore.prototype.isValidAddressSearch = function(query) {
+  return query &&
+         !_.isEmpty(query.trim()) &&
+         query.trim().split(' ').length >= MIN_ADDRESS_SEARCH_LENGTH;
+};
+
+/**
+ * Can this query be used to search for a name?
+ *
+ * Some search strings are going to be very slow to search using the Fuse library
+ * so restrict the length of names that will be searched using it.
+ *
+ * @param {String} query
+ * @returns {Boolean}
+ */
+MembersStore.prototype.isValidNameSearch = function(query) {
+  return query &&
+         !_.isEmpty(query.trim()) &&
+         query.trim().split(' ').length <= MAX_NAME_SEARCH_LENGTH;
 };
 
 /**
@@ -49,7 +124,7 @@ MembersStore.prototype.searchByState = function(state) {
 
   return _.filter(this._members, function(member) {
     return member.customData.fullStateName &&
-           (member.customData.fullStateName.toLowerCase() ==
+           (member.customData.fullStateName.toLowerCase() ===
             state.toLowerCase());
   });
 };

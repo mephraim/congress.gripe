@@ -2,7 +2,10 @@
  * @ngInject
  */
 function Run($timeout, $location, $window) {
-  handle404Redirect();
+  // Tell Material Design lite to upgrade any elements added after page load.
+  $timeout(function() {
+    $window.componentHandler.upgradeDom();
+  }, 100);
 
   /**
    * Handle redirects from 404.html

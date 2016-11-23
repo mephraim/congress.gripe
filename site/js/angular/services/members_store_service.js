@@ -33,6 +33,66 @@ function MembersStoreService($http, $q) {
     },
 
     /**
+     * Find the senators and representatives for a district.
+     *
+     * @param {String} state
+     * @param {Number} district
+     * @returns {Promise}
+     */
+    findAllForDistrict: function(state, district) {
+      return $q(function(resolve, reject) {
+        if (store) {
+          resolve(store.findAllForDistrict(state, district));
+        } else {
+          httpPromise.then(function() {
+            resolve(store.findAllForDistrict(state, district));
+          });
+        }
+      });
+    },
+
+    /**
+     * Can this query be used to search for an address?
+     * The Geolocation API requires a minimum number of words to successfully search
+     * for an address.
+     *
+     * @param {String} query
+     * @returns {Boolean}
+     */
+    isValidAddressSearch: function(query) {
+      return $q(function(resolve, reject) {
+        if (store) {
+          resolve(store.isValidAddressSearch(query));
+        } else {
+          httpPromise.then(function() {
+            resolve(store.isValidAddressSearch(query));
+          });
+        }
+      });
+    },
+
+    /**
+     * Can this query be used to search for a name?
+     *
+     * Some search strings are going to be very slow to search using the Fuse library
+     * so restrict the length of names that will be searched using it.
+     *
+     * @param {String} query
+     * @returns {Boolean}
+     */
+    isValidNameSearch: function(query) {
+      return $q(function(resolve, reject) {
+        if (store) {
+          resolve(store.isValidNameSearch(query));
+        } else {
+          httpPromise.then(function() {
+            resolve(store.isValidNameSearch(query));
+          });
+        }
+      });
+    },
+
+    /**
      * Search for a member for congress.
      *
      * @param {String} query
