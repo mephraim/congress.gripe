@@ -1,5 +1,6 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var path = require('path');
 var webpack = require('webpack');
@@ -12,7 +13,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'assets/[name].js'
+    filename: 'assets/[hash].[name].js'
   },
 
   module: {
@@ -45,7 +46,14 @@ module.exports = {
     }]),
 
     // Pull any required CSS out into a main.css file
-    new ExtractTextPlugin('assets/main.css'),
+    new ExtractTextPlugin('assets/[hash].main.css'),
+
+    // This allows us to reference the generated files from within the template
+    // using lodash syntax.
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: 'site/index.html',
+    }),
 
     // Automatically inject Angular dependencies using @ngInject
     new ngAnnotatePlugin({ add: true }),
