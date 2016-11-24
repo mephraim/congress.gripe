@@ -1,11 +1,11 @@
 /**
  * @ngInject
  */
-function Run($timeout, $location, $window) {
-  // Tell Material Design lite to upgrade any elements added after page load.
-  $timeout(function() {
+function Run($timeout, $location, $rootScope, $window) {
+  // Once a view has loaded, notify the JS code for Material Design Lite
+  $rootScope.$on('$viewContentLoaded', function() {
     $window.componentHandler.upgradeDom();
-  }, 100);
+  });
 
   /**
    * Handle redirects from 404.html

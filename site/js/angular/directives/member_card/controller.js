@@ -16,6 +16,13 @@ MemberCardDirectiveController.prototype.isStateChipVisible = function() {
 };
 
 /**
+ * Should the district chip be displayed?
+ */
+MemberCardDirectiveController.prototype.isDistrictChipVisible = function() {
+  return this.member() && this.member().district;
+};
+
+/**
  * Get the member's full name.
  * @return {String}
  */

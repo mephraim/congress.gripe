@@ -32,6 +32,17 @@ HomeController.prototype.getLoadingIndicatorClass = function() {
 };
 
 /**
+ * Returns a name to display for the member.
+ *
+ * @param {Object} member
+ * @returns {String}
+ */
+HomeController.prototype.getNameForMember = function(member) {
+  return [(member.person.nickname || member.person.firstname),
+          member.person.lastname].join(' ');
+};
+
+/**
  * Builds a url for the member's profile page.
  *
  * @param {Object} member

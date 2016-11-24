@@ -14,7 +14,7 @@
          ng-class="homeCtrl.getLoadingIndicatorClass()"></div>
   </div>
 
-  <div class="search-card__search-results-header mdl-color--cyan-800"
+  <div class="search-card__search-results-header mdl-color--light-blue-500"
        ng-show="homeCtrl.isCurrentSearchForState()">
     <i class="search-card__state-icon"
        ng-class="homeCtrl.getStateIconClass()"></i>
@@ -22,7 +22,7 @@
     <a href="/states/{{homeCtrl.getStateForStateHeader().toLowerCase()}}">{{homeCtrl.getStateForStateHeader()}}</a>
   </div>
 
-  <div class="search-card__search-results-header mdl-color--cyan-800"
+  <div class="search-card__search-results-header mdl-color--light-blue-500"
        ng-show="homeCtrl.currentCongressionalDistrict">
     <i class="search-card__state-icon"
        ng-class="homeCtrl.getStateIconClass()"></i>
@@ -41,7 +41,7 @@
           </i>
 
           <span>
-            {{member.person.firstname}} {{member.person.lastname}}
+            {{homeCtrl.getNameForMember(member)}}
           </span>
 
           <span class="mdl-list__item-text-body">

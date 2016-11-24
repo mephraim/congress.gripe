@@ -4,13 +4,19 @@
 }
 
 .member-card__title {
-  background: #fafafa;
+  background: #f1f1f1;
 }
 
 .member-card__chips {
   position: absolute;
   right: 20px;
   top: 10px;
+}
+
+.member-card__district-chip-number,
+.member-card__district-chip-party {
+  font-size: 15px;
+  font-weight: 100;
 }
 
 .member-card__state-chip a {

@@ -12,6 +12,19 @@
   <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[0] %>">
 </head>
 <body ng-app="CongressApp">
-  <div ng-view></div>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="site-header mdl-layout__header mdl-color--blue-grey-600">
+      <div class="mdl-layout__header-row">
+        <a href="/" class="mdl-layout-title">
+          <i class="material-icons site-header__icon">account_balance</i>
+          Contact Congress
+        </a>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div ng-view></div>
+    </main>
+  </div>
 </body>
 </html>

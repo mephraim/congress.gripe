@@ -43,13 +43,13 @@ MembersStore.prototype.findAllForState = function(state, roleType) {
     state = stateInfo.getAbbreviation(state);
   }
 
-  return _.filter(this._members, function(member) {
+  return this._sort(_.filter(this._members, function(member) {
     return (member.state &&
             (member.state.toLowerCase() === state.toLowerCase())) &&
 
            // Only take role type into consideration if one was passed in.
            (!roleType || (member.role_type == roleType));
-  });
+  }));
 };
 
 /**
@@ -150,14 +150,36 @@ MembersStore.prototype._loadData = function(data) {
     shouldSort: true,
     threshold: 0.3,
     keys: [
-      { name: 'person.name', weight: 0.9 },
-      { name: 'customData.fullStateName', weight: 0.7 },
-
+      { name: 'person.nickname', weight: 0.9 },
+      { name: 'person.name', weight: 0.8 },
       { name: 'person.firsname', weight: 0.3 },
-      { name: 'person.lastname', weight: 0.3 },
-      { name: 'person.twitterid', weight: 0.2 },
-      { name: 'person.youtubeid', weight: 0.2 }
+      { name: 'person.lastname', weight: 0.3 }
     ]
+  });
+};
+
+/**
+ * Sorts the members by district or name (depending on what's available).
+ *
+ * @param {Object[]} members
+ * @returns {Object[]}
+ */
+MembersStore.prototype._sort = function(members) {
+  return members.sort(function(memberA, memberB) {
+    // If one of the members doesn't have a district, use last names for sorting.
+    if (!memberA.district || !memberB.district) {
+      if (memberA.person.lastname.toLowerCase() < memberB.person.lastname.toLowerCase()) {
+        return -1;
+      }
+
+      if (memberA.person.lastname.toLowerCase() > memberB.person.lastname.toLowerCase()) {
+        return 1;
+      }
+
+      return 0;
+    }
+
+    return memberA.district - memberB.district;
   });
 };
 
