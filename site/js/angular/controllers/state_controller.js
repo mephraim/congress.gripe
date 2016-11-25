@@ -5,16 +5,22 @@ function StateController($routeParams, MembersStoreService, StateInfoService) {
   var self = this;
   self.StateInfoService = StateInfoService;
   self.stateName = $routeParams.name.toLowerCase();
+  self.district = $routeParams.district && parseInt($routeParams.district, 0);
 
-  MembersStoreService.findAllForState(
-    self.stateName, MembersStoreService.ROLE_TYPE_SENATOR).then(function(senators) {
+  MembersStoreService.findAllForState(self.stateName, MembersStoreService.ROLE_TYPE_SENATOR).then(function(senators) {
     self.senators = senators;
   });
 
-  MembersStoreService.findAllForState(
-    self.stateName, MembersStoreService.ROLE_TYPE_REPRESENTATIVE).then(function(representatives) {
-    self.representatives = representatives;
-  });
+  var state = StateInfoService.getAbbreviation(self.stateName);
+  if (self.district) {
+    MembersStoreService.findRepresentativeForDistrict(state, self.district).then(function(representative) {
+      self.representatives = [representative];
+    });
+  } else {
+    MembersStoreService.findAllForState(state, MembersStoreService.ROLE_TYPE_REPRESENTATIVE).then(function(representatives) {
+      self.representatives = representatives;
+    });
+  }
 }
 
 /**

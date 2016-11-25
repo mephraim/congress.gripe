@@ -45,6 +45,7 @@
 .search-card__search-results-header a {
   color: #fff;
   font-weight: 200;
+  text-decoration: none;
 }
 
 .search-card__search-results-header .search-card__state-icon {

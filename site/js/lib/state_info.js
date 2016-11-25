@@ -79,7 +79,7 @@ module.exports = {
   */
 function getAbbreviation(name) {
   if (isStateAbbreviation(name)) {
-    return name;
+    return name.toUpperCase();
   }
 
   var found = _.find(STATE_INFO, function(state) {

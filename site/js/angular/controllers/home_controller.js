@@ -32,6 +32,14 @@ HomeController.prototype.getLoadingIndicatorClass = function() {
 };
 
 /**
+ * Get the number of members that have been found.
+ * @returns {Number}
+ */
+HomeController.prototype.getMembersCount = function() {
+  return this.hasSearchResults() && this.getSearchResults().length;
+};
+
+/**
  * Returns a name to display for the member.
  *
  * @param {Object} member

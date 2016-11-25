@@ -16,17 +16,20 @@
 
   <div class="search-card__search-results-header mdl-color--light-blue-500"
        ng-show="homeCtrl.isCurrentSearchForState()">
-    <i class="search-card__state-icon"
-       ng-class="homeCtrl.getStateIconClass()"></i>
-    All Senators and Representatives for
-    <a href="/states/{{homeCtrl.getStateForStateHeader().toLowerCase()}}">{{homeCtrl.getStateForStateHeader()}}</a>
+    <a href="/states/{{homeCtrl.getStateForStateHeader().toLowerCase()}}">
+      <i class="search-card__state-icon"
+        ng-class="homeCtrl.getStateIconClass()"></i>
+      View all {{homeCtrl.getMembersCount()}} Senators and Representatives for {{homeCtrl.getStateForStateHeader()}} »
+    </a>
   </div>
 
   <div class="search-card__search-results-header mdl-color--light-blue-500"
        ng-show="homeCtrl.currentCongressionalDistrict">
     <i class="search-card__state-icon"
        ng-class="homeCtrl.getStateIconClass()"></i>
-    Senators and Representatives for {{homeCtrl.getCongressionalDistrictHeader()}}
+    <a href="/states/{{homeCtrl.currentCongressionalDistrict.state.toLowerCase()}}/district/{{homeCtrl.currentCongressionalDistrict.number}}">
+      View all Senators and Representatives for {{homeCtrl.getCongressionalDistrictHeader()}} »
+    </a>
   </div>
 
   <ul class="mdl-list search-card__search-results"

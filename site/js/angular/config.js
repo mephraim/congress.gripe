@@ -21,6 +21,11 @@ function Config($locationProvider, $routeProvider) {
       templateUrl: '/templates/state.html'
     }).
 
+    when('/states/:name/district/:district', {
+      controller: 'StateController as stateCtrl',
+      templateUrl: '/templates/state.html'
+    }).
+
     otherwise({
       redirectTo: ''
     });

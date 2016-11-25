@@ -74,6 +74,25 @@ function MembersStoreService($http, $q) {
     },
 
     /**
+     * Find the representative for a specific district.
+     *
+     * @param {String} state
+     * @param {Number} district
+     * @returns {Promise}
+     */
+    findRepresentativeForDistrict: function(state, district) {
+      return $q(function(resolve, reject) {
+        if (store) {
+          resolve(store.findRepresentativeForDistrict(state, district));
+        } else {
+          httpPromise.then(function() {
+            resolve(store.findRepresentativeForDistrict(state, district));
+          });
+        }
+      });
+    },
+
+    /**
      * Can this query be used to search for an address?
      * The Geolocation API requires a minimum number of words to successfully search
      * for an address.
