@@ -7,7 +7,7 @@ var _ = require('underscore');
  * @ngInject
  */
 function CensusService($http, $httpParamSerializer, $q) {
-  var GEOGRAPHIES_URL = 'https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress';
+  var GEOGRAPHIES_URL = 'http://geocoding.geo.census.gov/geocoder/geographies/onelineaddress';
   var _getGeographyDataDebounced = _.debounce(_getGeographyData, 500);
 
   return {

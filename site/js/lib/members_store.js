@@ -20,6 +20,35 @@ MembersStore.ROLE_TYPE_REPRESENTATIVE = ROLE_TYPE_REPRESENTATIVE;
 MembersStore.ROLE_TYPE_SENATOR = ROLE_TYPE_SENATOR;
 
 /**
+ * Can this query be used to search for an address?
+ * The Geolocation API requires a minimum number of words to successfully search
+ * for an address.
+ *
+ * @param {String} query
+ * @returns {Boolean}
+ */
+MembersStore.isValidAddressSearch = function(query) {
+  return query &&
+         !_.isEmpty(query.trim()) &&
+         query.trim().split(' ').length >= MIN_ADDRESS_SEARCH_LENGTH;
+};
+
+/**
+ * Can this query be used to search for a name?
+ *
+ * Some search strings are going to be very slow to search using the Fuse library
+ * so restrict the length of names that will be searched using it.
+ *
+ * @param {String} query
+ * @returns {Boolean}
+ */
+MembersStore.isValidNameSearch = function(query) {
+  return query &&
+         !_.isEmpty(query.trim()) &&
+         query.trim().split(' ').length <= MAX_NAME_SEARCH_LENGTH;
+};
+
+/**
  * Find a member by their govtrack ID.
  *
  * @param {Number} id
@@ -90,35 +119,6 @@ MembersStore.prototype.findSenatorsForState = function(state) {
     return member.role_type === ROLE_TYPE_SENATOR &&
            member.state === state;
   });
-};
-
-/**
- * Can this query be used to search for an address?
- * The Geolocation API requires a minimum number of words to successfully search
- * for an address.
- *
- * @param {String} query
- * @returns {Boolean}
- */
-MembersStore.prototype.isValidAddressSearch = function(query) {
-  return query &&
-         !_.isEmpty(query.trim()) &&
-         query.trim().split(' ').length >= MIN_ADDRESS_SEARCH_LENGTH;
-};
-
-/**
- * Can this query be used to search for a name?
- *
- * Some search strings are going to be very slow to search using the Fuse library
- * so restrict the length of names that will be searched using it.
- *
- * @param {String} query
- * @returns {Boolean}
- */
-MembersStore.prototype.isValidNameSearch = function(query) {
-  return query &&
-         !_.isEmpty(query.trim()) &&
-         query.trim().split(' ').length <= MAX_NAME_SEARCH_LENGTH;
 };
 
 /**

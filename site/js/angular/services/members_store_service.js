@@ -82,15 +82,7 @@ function MembersStoreService($http, $q) {
      * @returns {Boolean}
      */
     isValidAddressSearch: function(query) {
-      return $q(function(resolve, reject) {
-        if (store) {
-          resolve(store.isValidAddressSearch(query));
-        } else {
-          httpPromise.then(function() {
-            resolve(store.isValidAddressSearch(query));
-          });
-        }
-      });
+      return MembersStore.isValidAddressSearch(query);
     },
 
     /**
@@ -103,15 +95,7 @@ function MembersStoreService($http, $q) {
      * @returns {Boolean}
      */
     isValidNameSearch: function(query) {
-      return $q(function(resolve, reject) {
-        if (store) {
-          resolve(store.isValidNameSearch(query));
-        } else {
-          httpPromise.then(function() {
-            resolve(store.isValidNameSearch(query));
-          });
-        }
-      });
+      return MembersStore.isValidNameSearch(query);
     },
 
     /**
