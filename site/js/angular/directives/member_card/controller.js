@@ -1,10 +1,28 @@
 /**
  * @ngInject
  */
-function MemberCardDirectiveController(PartyInfoService, StateInfoService) {
+function MemberCardDirectiveController(PartyInfoService, StateInfoService, UrlService) {
   this.PartyInfoService = PartyInfoService;
   this.StateInfoService = StateInfoService;
+  this.UrlService = UrlService;
 }
+
+/**
+ * Returns an href to the state detail page.
+ * @returns {String}
+ */
+MemberCardDirectiveController.prototype.getStateUrl = function() {
+  return this.member() && this.UrlService.getStateUrl(this.member().customData.fullStateName);
+};
+
+/**
+ * Returns an href for the district detail page.
+ * @returns {String}
+ */
+MemberCardDirectiveController.prototype.getDistrictUrl = function() {
+  return this.member() && this.UrlService.getDistrictUrl(
+    this.member().customData.fullStateName, this.member().district);
+};
 
 /**
  * Should the state chip be displayed?

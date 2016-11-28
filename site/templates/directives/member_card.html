@@ -7,17 +7,19 @@
     <div class="member-card__chips">
       <span class="mdl-chip mdl-chip--contact member-card__state-chip"
             ng-if="memberCardCtrl.isDistrictChipVisible()">
-        <span class="member-card__district-chip-number mdl-chip__contact mdl-color--blue-grey-700 mdl-color-text--white">
-          {{memberCardCtrl.member().district}}
-        </span>
-        <span class="mdl-chip__text">
-          District
-        </span>
+        <a href="{{memberCardCtrl.getDistrictUrl()}}">
+          <span class="member-card__district-chip-number mdl-chip__contact mdl-color--blue-grey-700 mdl-color-text--white">
+            {{memberCardCtrl.member().district}}
+          </span>
+          <span class="mdl-chip__text">
+            District
+          </span>
+        </a>
       </span>
 
       <span class="mdl-chip mdl-chip--contact member-card__state-chip"
             ng-if="memberCardCtrl.isStateChipVisible()">
-        <a href="/states/{{memberCardCtrl.member().customData.fullStateName.toLowerCase()}}">
+        <a href="{{memberCardCtrl.getStateUrl()}}">
           <span class="mdl-chip__contact mdl-color--blue-grey-600 mdl-color-text--white">
             <i class="member-card__state-chip-icon"
               ng-class="memberCardCtrl.getStateChipIconClass()"></i>

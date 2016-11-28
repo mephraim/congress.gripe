@@ -1,24 +1,46 @@
 var ENTER_KEY_CODE = 13;
-var MEMBER_URL_TEMPLATE = '/members/{{name}}/{{id}}';
 
 /**
  * @ngInject
  */
-function HomeController($interpolate, $location, $scope, CensusService, HangoutService, MembersStoreService, PartyInfoService, StateInfoService) {
+function HomeController($location, $scope, CensusService, HangoutService, MembersStoreService, PartyInfoService, StateInfoService, UrlService) {
   var self = this;
-  self.$interpolate = $interpolate;
   self.$location = $location;
   self.$scope = $scope;
 
+  self.CensusService = CensusService;
   self.HangoutService = HangoutService;
   self.MembersStoreService = MembersStoreService;
   self.PartyInfoService = PartyInfoService;
   self.StateInfoService = StateInfoService;
-  self.CensusService = CensusService;
+  self.UrlService = UrlService;
 
   self._initStartingQuery();
   self._initLocationUpdater();
 }
+
+/**
+ * Returns the text for congressional district header.
+ * @returns {String}
+ */
+HomeController.prototype.getCongressionalDistrictHeader = function() {
+  if (!this.currentCongressionalDistrict) {
+    return;
+  }
+
+  return [this.StateInfoService.getName(this.currentCongressionalDistrict.state),
+          this.currentCongressionalDistrict.name].join(' ');
+};
+
+/**
+ * Returns the url for the currently displayed district (if there is one).
+ * @returns {String}
+ */
+HomeController.prototype.getDistrictUrl = function() {
+  return this.currentCongressionalDistrict && this.UrlService.getDistrictUrl(
+    this.currentCongressionalDistrict.state,
+    this.currentCongressionalDistrict.number);
+};
 
 /**
  * Returns a class array for the loading indicator.
@@ -56,11 +78,8 @@ HomeController.prototype.getNameForMember = function(member) {
  * @param {Object} member
  * @returns {String}
  */
-HomeController.prototype.getUrlForMember = function(member) {
-  return this.$interpolate(MEMBER_URL_TEMPLATE)({
-    id: member.person.id,
-    name: member.person.firstname + '+' + member.person.lastname
-  });
+HomeController.prototype.getMemberUrl = function(member) {
+  return member && this.UrlService.getMemberUrl(member);
 };
 
 /**
@@ -84,46 +103,11 @@ HomeController.prototype.getSearchCardClass = function() {
 };
 
 /**
- * Handles keyup events in the search box.
- *
- * @listens Event
- * @param {Event} $event
- */
-HomeController.prototype.handleSearchKeyup = function($event) {
-  delete this.currentCongressionalDistrict;
-
-  if ($event.keyCode == ENTER_KEY_CODE && this.hasSearchResults()) {
-    this.$location.url(this.getUrlForMember(this.getSearchResults()[0]));
-  }
-};
-
-/**
- * Are there search results to display?
- * @returns {Boolean}
- */
-HomeController.prototype.hasSearchResults = function() {
-  return this.getSearchResults().length > 0;
-};
-
-/**
  * Returns the current list of search results.
  * @returns {Object[]}
  */
 HomeController.prototype.getSearchResults = function() {
   return this._searchResults || [];
-};
-
-/**
- * Returns the text for congressional district header.
- * @returns {String}
- */
-HomeController.prototype.getCongressionalDistrictHeader = function() {
-  if (!this.currentCongressionalDistrict) {
-    return;
-  }
-
-  return [this.StateInfoService.getName(this.currentCongressionalDistrict.state),
-          this.currentCongressionalDistrict.name].join(' ');
 };
 
 /**
@@ -151,12 +135,50 @@ HomeController.prototype.getStateIconClass = function() {
 };
 
 /**
+ * Returns a url for the currently displayed state (if there is one).
+ * @returns {String}
+ */
+HomeController.prototype.getStateUrl = function() {
+  return this.isCurrentSearchForState() &&
+         this.UrlService.getStateUrl(
+           this.StateInfoService.getName(this.currentSearch.trim()));
+};
+
+/**
+ * Handles keyup events in the search box.
+ *
+ * @listens Event
+ * @param {Event} $event
+ */
+HomeController.prototype.handleSearchKeyup = function($event) {
+  if ($event.keyCode != ENTER_KEY_CODE || !this.hasSearchResults()) {
+    return;
+  }
+
+  // If it looks like the user was searching for a state, take the user to the
+  // state page if they hit enter.
+  if (this.isCurrentSearchForState()) {
+    this.$location.url(this.getStateUrl());
+  } else {
+    this.$location.url(this.UrlService.getMemberUrl(this.getSearchResults()[0]));
+  }
+};
+
+/**
+ * Are there search results to display?
+ * @returns {Boolean}
+ */
+HomeController.prototype.hasSearchResults = function() {
+  return this.getSearchResults().length > 0;
+};
+
+/**
  * Is the user searching for a state?
  * @returns {Boolean}
  */
 HomeController.prototype.isCurrentSearchForState = function() {
   return this.currentSearch &&
-         this.StateInfoService.isState(this.currentSearch);
+         this.StateInfoService.isState(this.currentSearch.trim());
 };
 
 /**

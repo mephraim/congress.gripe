@@ -25,4 +25,6 @@ require('angular').
   service('PartyInfoService',
     require('./services/party_info_service.js')).
   service('StateInfoService',
-    require('./services/state_info_service.js'));
+    require('./services/state_info_service.js')).
+  service('UrlService',
+    require('./services/url_service.js'));

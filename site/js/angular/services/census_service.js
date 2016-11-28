@@ -3,11 +3,15 @@ var _ = require('underscore');
 /**
  * A service for querying the Census geocoder.
  * Documenation here: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
+ * Layer codes here: https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer
  *
  * @ngInject
  */
 function CensusService($http, $httpParamSerializer, $q) {
   var GEOGRAPHIES_URL = 'http://geocoding.geo.census.gov/geocoder/geographies/onelineaddress';
+  var LAYER_CODE_CONGRESSIONAL_DISTRICTS = 54;
+  var LAYER_KEY_CONGRESSIONAL_DISTRICTS = '115th Congressional Districts';
+
   var _getGeographyDataDebounced = _.debounce(_getGeographyData, 500);
 
   return {
@@ -40,7 +44,7 @@ function CensusService($http, $httpParamSerializer, $q) {
           return resolve();
         }
 
-        var districtData = addressData.geographies['115th Congressional Districts'][0];
+        var districtData = addressData.geographies[LAYER_KEY_CONGRESSIONAL_DISTRICTS][0];
         resolve({
           name: districtData.NAME,
           number: parseInt(districtData.BASENAME),
@@ -66,7 +70,7 @@ function CensusService($http, $httpParamSerializer, $q) {
       vintage: 'Current_Current',
 
       // Include the congressional district layer
-      layers: 54,
+      layers: LAYER_CODE_CONGRESSIONAL_DISTRICTS,
       format: 'jsonp',
       callback: 'JSON_CALLBACK'
     });
