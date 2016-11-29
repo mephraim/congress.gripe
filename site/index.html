@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/">
 
   <script src="https://apis.google.com/js/platform.js"></script>
@@ -22,8 +23,7 @@
       </div>
     </header>
 
-    <main class="mdl-layout__content">
-      <div ng-view></div>
+    <main class="mdl-layout__content" ng-view autoscroll>
     </main>
   </div>
 </body>

@@ -7,6 +7,8 @@ function Run($timeout, $location, $rootScope, $window) {
     $window.componentHandler.upgradeDom();
   });
 
+  handle404Redirect();
+
   /**
    * Handle redirects from 404.html
    *
@@ -20,7 +22,6 @@ function Run($timeout, $location, $rootScope, $window) {
 
     $timeout(function() {
       if (redirect && redirect != $location.url()) {
-        console.log('redirected url: ', redirect);
         $location.path(redirect);
         $location.replace();
       }

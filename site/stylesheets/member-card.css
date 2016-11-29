@@ -7,41 +7,14 @@
   background: #f1f1f1;
 }
 
-.member-card__chips {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-}
-
-.member-card__district-chip-number,
-.member-card__district-chip-party {
-  font-size: 15px;
-  font-weight: 100;
-}
-
-.member-card__state-chip a {
-  color: rgba(0, 0, 0, 0.87);
-  font-weight: 200;
-}
-
-.member-card__state-chip a:hover {
-  font-weight: 500;
-}
-
-.member-card__state-chip-icon {
-  font-size: 21px;
-  left: 3px;
-  position: relative;
-}
-
 .member-card_contact-picture {
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .member-card__phone {
   display: inline-block;
   margin-left: 3px;
-  vertical-align: top;
+  vertical-align: middle;
   transition: color .3s;
 }
 
@@ -83,6 +56,7 @@
   text-align: center;
   text-indent: -10px;
   text-transform: uppercase;
+  vertical-align: middle;
   width: 80px;
 }
 
@@ -90,7 +64,7 @@
   display: inline-block;
   margin: 0;
   padding: 0;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .member-card__contact-list-item {
@@ -108,4 +82,72 @@
 
 .member-card__contact-list .mdl-list__item .mdl-list__item-primary-content .mdl-list__item-icon {
   margin-right: 8px;
+}
+
+.member-card__footer {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
+  .single-member .member-card {
+    width: auto;
+  }
+
+  .member-card__or,
+  .member-card__phone {
+    display: none;
+  }
+
+  .member-card__contact-list {
+    margin-left: 25px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .member-list__header-card-title {
+    padding: 7px 10px;
+  }
+
+  .member-list__header-card-title h2 {
+    font-size: 22px;
+  }
+
+  .member-card {
+    width: auto;
+  }
+
+  .member-card__title {
+    padding: 9px;
+  }
+
+  .member-card__title h2 {
+    font-size: 18px;
+  }
+
+  .member-card__title .member-card__chips {
+    display: none;
+  }
+
+  .member-card__body {
+    padding-bottom: 0;
+  }
+
+  .member-card__footer {
+    display: block;
+    padding-top: 0;
+  }
+
+  .member-card__phone {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .member-card__contact-list {
+    margin-left: 10px;
+  }
+
+  .member-card__contact-list-item {
+    font-size: 12px;
+  }
 }

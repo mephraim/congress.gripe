@@ -1,0 +1,36 @@
+<div class="member-card__chips">
+  <span class="mdl-chip mdl-chip--contact member-card__state-chip"
+        ng-if="memberCardChipsCtrl.isDistrictChipVisible()">
+    <a href="{{memberCardChipsCtrl.getDistrictUrl()}}">
+      <span class="member-card__district-chip-number mdl-chip__contact mdl-color--blue-grey-700 mdl-color-text--white">
+        {{memberCardChipsCtrl.member().district}}
+      </span>
+      <span class="mdl-chip__text">
+        District
+      </span>
+    </a>
+  </span>
+
+  <span class="mdl-chip mdl-chip--contact member-card__state-chip"
+        ng-if="memberCardChipsCtrl.isStateChipVisible()">
+    <a href="{{memberCardChipsCtrl.getStateUrl()}}">
+      <span class="mdl-chip__contact mdl-color--blue-grey-600 mdl-color-text--white">
+        <i class="member-card__state-chip-icon"
+          ng-class="memberCardChipsCtrl.getStateChipIconClass()"></i>
+      </span>
+      <span class="mdl-chip__text">
+        {{memberCardChipsCtrl.member().customData.fullStateName}}
+      </span>
+    </a>
+  </span>
+
+  <span class="mdl-chip mdl-chip--contact member-card__party-chip">
+    <span class="member-card__district-chip-party mdl-chip__contact mdl-color-text--white"
+          ng-class="memberCardChipsCtrl.getPartyChipClass()">
+      {{memberCardChipsCtrl.getPartyChipParty()}}
+    </span>
+    <span class="mdl-chip__text">
+      {{memberCardChipsCtrl.member().title_long}}
+    </span>
+  </span>
+</div>

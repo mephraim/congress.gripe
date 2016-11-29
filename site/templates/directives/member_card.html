@@ -1,48 +1,13 @@
 <div class="member-card mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title member-card__title">
-    <h1 class="mdl-card__title-text">
+    <h2 class="mdl-card__title-text">
       {{memberCardCtrl.getMemberName()}}
-    </h1>
+    </h2>
 
-    <div class="member-card__chips">
-      <span class="mdl-chip mdl-chip--contact member-card__state-chip"
-            ng-if="memberCardCtrl.isDistrictChipVisible()">
-        <a href="{{memberCardCtrl.getDistrictUrl()}}">
-          <span class="member-card__district-chip-number mdl-chip__contact mdl-color--blue-grey-700 mdl-color-text--white">
-            {{memberCardCtrl.member().district}}
-          </span>
-          <span class="mdl-chip__text">
-            District
-          </span>
-        </a>
-      </span>
-
-      <span class="mdl-chip mdl-chip--contact member-card__state-chip"
-            ng-if="memberCardCtrl.isStateChipVisible()">
-        <a href="{{memberCardCtrl.getStateUrl()}}">
-          <span class="mdl-chip__contact mdl-color--blue-grey-600 mdl-color-text--white">
-            <i class="member-card__state-chip-icon"
-              ng-class="memberCardCtrl.getStateChipIconClass()"></i>
-          </span>
-          <span class="mdl-chip__text">
-            {{memberCardCtrl.member().customData.fullStateName}}
-          </span>
-        </a>
-      </span>
-
-      <span class="mdl-chip mdl-chip--contact member-card__party-chip">
-        <span class="member-card__district-chip-party mdl-chip__contact mdl-color-text--white"
-              ng-class="memberCardCtrl.getPartyChipClass()">
-          {{memberCardCtrl.getPartyChipParty()}}
-        </span>
-        <span class="mdl-chip__text">
-          {{memberCardCtrl.member().title_long}}
-        </span>
-      </span>
-    </div>
+    <member-card-chips member="memberCardCtrl.member()"></member-card-chips>
   </div>
 
-  <div class="mdl-card__supporting-text">
+  <div class="mdl-card__supporting-text member-card__body">
     <img class="member-card_contact-picture"
          ng-src="https://www.govtrack.us/data/photos/{{memberCardCtrl.member().person.id}}-100px.jpeg"
          width="100" />
@@ -61,36 +26,28 @@
     </div>
 
     <ul class="mdl-list member-card__contact-list">
-      <li class="mdl-list__item member-card__contact-list-item">
-        <span class="mdl-list__item-primary-content">
-          <i class="material-icons mdl-list__item-icon">mail</i>
-          <a href="{{memberCardCtrl.member().extra.contact_form}}">
-            Contact by email
-          </a>
-        </span>
-      </li>
+      <member-card-contact-item href="memberCardCtrl.member().extra.contact_form"
+                                icon="mail"
+                                text="Contact by Email">
+      </member-card-contact-item>
 
-      <li class="mdl-list__item member-card__contact-list-item">
-        <span class="mdl-list__item-primary-content">
-          <i class="material-icons mdl-list__item-icon">public</i>
-          <a href="{{memberCardCtrl.member().website}}">
-            Visit Website
-          </a>
-        </span>
-      </li>
+      <member-card-contact-item href="memberCardCtrl.member().website"
+                                icon="public"
+                                text="Visit Website">
+      </member-card-contact-item>
 
-      <li class="mdl-list__item member-card__contact-list-item">
-        <span class="mdl-list__item-primary-content">
-          <i class="material-icons mdl-list__item-icon">play_circle_filled</i>
-          <a href="https://www.youtube.com/user/{{memberCardCtrl.member().person.youtubeid}}">
-            Visit YouTube Account
-          </a>
-        </span>
-      </li>
+      <member-card-contact-item href="memberCardCtrl.getYouTubeUrl()"
+                                icon="play_circle_filled"
+                                text="Visit YouTube Account">
+      </member-card-contact-item>
     </ul>
 
     <p>
       <span id="hangout-placeholder"></span>
     </p>
+  </div>
+
+  <div class="mdl-card__actions member-card__footer">
+    <member-card-chips member="memberCardCtrl.member()"></member-card-chips>
   </div>
 </div>

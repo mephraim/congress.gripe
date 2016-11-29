@@ -191,6 +191,8 @@ HomeController.prototype.search = function() {
     return;
   }
 
+  delete this.currentCongressionalDistrict;
+
   if (self.MembersStoreService.isValidNameSearch(self.currentSearch)) {
     self.MembersStoreService.search(self.currentSearch).then(function(members) {
       self._searchResults = members;
