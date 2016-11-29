@@ -7,6 +7,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babyparse": "^0.4.6",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.0",
     "extract-text-webpack-plugin": "^1.0.1",
