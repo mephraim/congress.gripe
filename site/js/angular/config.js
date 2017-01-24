@@ -1,8 +1,15 @@
 /**
  * @ngInject
  */
-function Config($locationProvider, $routeProvider) {
+function Config($locationProvider, $routeProvider, $sceDelegateProvider) {
   $locationProvider.html5Mode(true);
+
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+
+    // Allow JSONP requests to the Census Geocoder
+    'http://geocoding.geo.census.gov/geocoder/**'
+  ]);
 
   $routeProvider.
     when('/', {

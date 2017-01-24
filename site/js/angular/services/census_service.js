@@ -71,8 +71,7 @@ function CensusService($http, $httpParamSerializer, $q) {
 
       // Include the congressional district layer
       layers: LAYER_CODE_CONGRESSIONAL_DISTRICTS,
-      format: 'jsonp',
-      callback: 'JSON_CALLBACK'
+      format: 'jsonp'
     });
   }
 
@@ -86,7 +85,9 @@ function CensusService($http, $httpParamSerializer, $q) {
    * @returns {Promise}
    */
   function _getGeographyData(address, resolve, reject) {
-    $http.jsonp(_buildGetUrlForGeographies(address)).then(function(response) {
+    $http.jsonp(_buildGetUrlForGeographies(address), {
+      jsonpCallbackParam: 'callback'
+    }).then(function(response) {
       if (response.data.result &&
           response.data.result.addressMatches &&
           response.data.result.addressMatches.length > 0) {
