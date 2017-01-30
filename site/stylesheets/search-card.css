@@ -23,7 +23,7 @@
   cursor: pointer;
   position: absolute;
   right: 15px;
-  top: 23px;
+  top: 19px;
 }
 
 .search-card_clear-button:focus {
@@ -40,9 +40,10 @@
 }
 
 .search-card__search-box {
+  color: #555;
   font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 40px;
-  font-weight: 200;
+  font-size: 36px;
+  font-weight: 100;
   margin: 0 auto;
   outline: none;
   padding: 15px;
@@ -51,6 +52,7 @@
 }
 
 .search-card__search-results-header {
+  background-color: #03a9f4;
   color: #fff;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-size: 20px;
@@ -58,7 +60,6 @@
   padding: 0 0 10px 0;
   text-align: center;
 }
-
 
 .search-card__search-results-header a {
   color: #fff;
@@ -120,6 +121,20 @@
 
 .search-help__search-options li {
   margin-bottom: 20px;
+}
+
+.search-no-results {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: 100;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-no-results__clear-button {
+  font-size: 15px;
+  font-weight: 100;
+  margin-left: 10px;
 }
 
 @media only screen and (max-width: 900px) {

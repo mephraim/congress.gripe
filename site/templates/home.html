@@ -55,7 +55,17 @@
     </div>
   </div>
 
-  <div class="search-card__search-results-header mdl-color--light-blue-500"
+  <div class="search-no-results"
+       ng-show="homeCtrl.isNoResultsVisible()">
+    No results found
+
+    <button class="mdl-button mdl-js-button mdl-button--raised search-no-results__clear-button"
+            ng-click="homeCtrl.handleClearButtonClick()">
+      Try again
+    </button>
+  </div>
+
+  <div class="search-card__search-results-header"
        ng-show="homeCtrl.isCurrentSearchForState()">
     <a href="{{homeCtrl.getStateUrl()}}">
       <i class="search-card__state-icon"
@@ -64,7 +74,7 @@
     </a>
   </div>
 
-  <div class="search-card__search-results-header mdl-color--light-blue-500"
+  <div class="search-card__search-results-header"
        ng-show="homeCtrl.currentCongressionalDistrict">
     <i class="search-card__state-icon"
        ng-class="homeCtrl.getStateIconClass()"></i>

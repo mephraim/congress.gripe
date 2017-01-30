@@ -4,6 +4,7 @@ var ENTER_KEY_CODE = 13;
  * @ngInject
  */
 function HomeController(
+  $document,
   $location,
   $scope,
   $timeout,
@@ -25,6 +26,9 @@ function HomeController(
   self.PartyInfoService = PartyInfoService;
   self.StateInfoService = StateInfoService;
   self.UrlService = UrlService;
+
+  self._searchBoxElement =
+    $document[0].querySelector('.search-card__search-box');
 
   self.updateSearchFromUrl();
   self._initLocationUpdater();
@@ -161,8 +165,9 @@ HomeController.prototype.getStateUrl = function() {
 HomeController.prototype.handleClearButtonClick = function() {
   delete this.currentSearch;
   delete this.currentCongressionalDistrict;
+  delete this._searchResults;
 
-  this.search();
+  this._searchBoxElement.focus();
 };
 
 /**
@@ -196,6 +201,16 @@ HomeController.prototype.handleSearchKeyup = function($event) {
  */
 HomeController.prototype.isClearButttonVisible = function() {
   return !this._searchInProgress && this._hasCurrentSearch();
+};
+
+/**
+ * Should the "No results" box be visible?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isNoResultsVisible = function() {
+  return !this._searchInProgress &&
+          this._hasCurrentSearch() &&
+         !this.hasSearchResults();
 };
 
 /**
