@@ -1,4 +1,5 @@
 var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
 
 /**
  * @ngInject
@@ -33,6 +34,17 @@ function HomeController(
   self.updateSearchFromUrl();
   self._initLocationUpdater();
 }
+
+/**
+ * Clear the search results.
+ */
+HomeController.prototype.clearResults = function() {
+  delete this.currentSearch;
+  delete this.currentCongressionalDistrict;
+  delete this._searchResults;
+
+  this._searchBoxElement.focus();
+};
 
 /**
  * Returns the text for congressional district header.
@@ -163,11 +175,7 @@ HomeController.prototype.getStateUrl = function() {
  * Handles the search clear button.
  */
 HomeController.prototype.handleClearButtonClick = function() {
-  delete this.currentSearch;
-  delete this.currentCongressionalDistrict;
-  delete this._searchResults;
-
-  this._searchBoxElement.focus();
+  this.clearResults();
 };
 
 /**
@@ -177,6 +185,11 @@ HomeController.prototype.handleClearButtonClick = function() {
  * @param {Event} $event
  */
 HomeController.prototype.handleSearchKeyup = function($event) {
+  if ($event.keyCode == ESC_KEY_CODE) {
+    this.clearResults();
+    return;
+  }
+
   if ($event.keyCode != ENTER_KEY_CODE || !this.hasSearchResults()) {
     return;
   }
