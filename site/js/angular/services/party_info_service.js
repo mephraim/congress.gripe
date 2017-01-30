@@ -60,7 +60,8 @@ function PartyColorService() {
    * @returns {Boolean}
    */
   function _isDemocrat(member) {
-    return member.party.toLowerCase() == 'democrat';
+    return member.party &&
+           member.party.toLowerCase() == 'democrat';
   }
 
   /**
@@ -71,7 +72,8 @@ function PartyColorService() {
    * @returns {Boolean}
    */
   function _isRepublican(member) {
-    return member.party.toLowerCase() == 'republican';
+    return member.party &&
+           member.party.toLowerCase() == 'republican';
   }
 }
 

@@ -250,16 +250,14 @@ HomeController.prototype.search = function() {
   if (self.MembersStoreService.isValidAddressSearch(self.currentSearch)) {
     self._searchInProgress = true;
     self.CensusService.getCongressionalDistrict(self.currentSearch).then(function(response) {
+      self.currentCongressionalDistrict = response;
+      self.MembersStoreService.findAllForDistrict(response.state, response.number).then(function(members) {
+        self._searchResults = members;
+      });
+    }, function() {
+      delete self.currentCongressionalDistrict;
+    }).finally(function() {
       self._searchInProgress = false;
-
-      if (response) {
-        self.currentCongressionalDistrict = response;
-        self.MembersStoreService.findAllForDistrict(response.state, response.number).then(function(members) {
-          self._searchResults = members;
-        });
-      } else {
-        delete self.currentCongressionalDistrict;
-      }
     });
   }
 };

@@ -41,15 +41,24 @@ function CensusService($http, $httpParamSerializer, $q) {
     return $q(function(resolve, reject) {
       getGeographyForAddress(address).then(function(addressData) {
         if (!addressData) {
-          return resolve();
+          return reject();
         }
 
         var districtData = addressData.geographies[LAYER_KEY_CONGRESSIONAL_DISTRICTS][0];
-        resolve({
-          name: districtData.NAME,
-          number: parseInt(districtData.BASENAME),
-          state: addressData.addressComponents.state
-        });
+
+        // Make sure the contressional district # will parse. Certain special
+        // districts (e.g. Washington DC's Delegate District (at Large)) won't
+        // parse and therefore won't resolve to a congressional district
+        // supported by our data.
+        if (parseInt(districtData.BASENAME)) {
+          resolve({
+            name: districtData.NAME,
+            number: parseInt(districtData.BASENAME),
+            state: addressData.addressComponents.state
+          });
+        } else {
+          reject();
+        }
       });
     });
   }
