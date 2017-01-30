@@ -178,6 +178,11 @@ HomeController.prototype.handleSearchKeyup = function($event) {
   // state page if they hit enter.
   if (this.isCurrentSearchForState()) {
     this.$location.url(this.getStateUrl());
+  // If a congressional district has loaded, take the user to the congressional district
+  // page when they hit enter.
+  } else if (this.currentCongressionalDistrict) {
+    this.$location.url(this.getDistrictUrl());
+  // Otherwise, go to the page for the first search result
   } else {
     this.$location.url(this.UrlService.getMemberUrl(this.getSearchResults()[0]));
   }
