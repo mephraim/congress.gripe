@@ -159,7 +159,9 @@ HomeController.prototype.getStateUrl = function() {
  * Handles the search clear button.
  */
 HomeController.prototype.handleClearButtonClick = function() {
-  this.currentSearch = null;
+  delete this.currentSearch;
+  delete this.currentCongressionalDistrict;
+
   this.search();
 };
 
