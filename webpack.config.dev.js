@@ -3,7 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 var config = require('./webpack.config.js');
-config.devtool = 'source-map';
+config.devtool = 'eval-source-map';
 config.output = {
   path: path.resolve(__dirname, 'build'),
   filename: 'assets/[name].js'
