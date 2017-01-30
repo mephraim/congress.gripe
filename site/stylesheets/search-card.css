@@ -1,5 +1,5 @@
 .search-card {
-  margin: 300px auto;
+  margin: 240px auto;
   min-height: auto;
   transition: margin .2s;
   width: 50%;
@@ -76,6 +76,32 @@
 
 .search-card__search-result .mdl-list__item-primary-content .mdl-list__item-icon {
   margin-right: 10px;
+}
+
+.search-help {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+.search-help a {
+  color: #aaa;
+  font-weight: 100;
+}
+
+.search-help__title {
+  color: #666;
+  padding: 22px;
+}
+
+.search-help__search-options {
+  color: #777;
+  font-size: 19px;
+  font-weight: 100;
+  margin: 0 0 25px 40px;
+  padding: 0;
+}
+
+.search-help__search-options li {
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 900px) {

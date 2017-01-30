@@ -3,10 +3,21 @@ var ENTER_KEY_CODE = 13;
 /**
  * @ngInject
  */
-function HomeController($location, $scope, CensusService, HangoutService, MembersStoreService, PartyInfoService, StateInfoService, UrlService) {
+function HomeController(
+  $location,
+  $scope,
+  $timeout,
+  CensusService,
+  HangoutService,
+  MembersStoreService,
+  PartyInfoService,
+  StateInfoService,
+  UrlService) {
+
   var self = this;
   self.$location = $location;
   self.$scope = $scope;
+  self.$timeout = $timeout;
 
   self.CensusService = CensusService;
   self.HangoutService = HangoutService;
@@ -15,7 +26,7 @@ function HomeController($location, $scope, CensusService, HangoutService, Member
   self.StateInfoService = StateInfoService;
   self.UrlService = UrlService;
 
-  self._initStartingQuery();
+  self.updateSearchFromUrl();
   self._initLocationUpdater();
 }
 
@@ -165,6 +176,27 @@ HomeController.prototype.handleSearchKeyup = function($event) {
 };
 
 /**
+ * Should the help box be visible?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isHelpVisible = function() {
+  return !this._hasCurrentSearch();
+};
+
+/**
+ * Handles a link to a search.
+ *
+ * NOTE: there's probably a way to just gracefully handle links to `?` links on
+ * the homepage, but I haven't found it yet.
+ */
+HomeController.prototype.handleSearchLink = function() {
+  var self = this;
+  self.$timeout(function() {
+    self.updateSearchFromUrl();
+  });
+};
+
+/**
  * Are there search results to display?
  * @returns {Boolean}
  */
@@ -217,23 +249,23 @@ HomeController.prototype.search = function() {
 };
 
 /**
- * Is there a search term in the search box?
- * @returns {Boolean}
+ * Update the searchbox with the search string from the url.
  */
-HomeController.prototype._hasCurrentSearch = function() {
-  return this.currentSearch && this.currentSearch.trim().length > 0;
-};
-
-/**
- * Initializes the starting search query (if there is one).
- * @private
- */
-HomeController.prototype._initStartingQuery = function() {
+HomeController.prototype.updateSearchFromUrl = function() {
   var query = this.$location.search().q;
   if (query) {
     this.currentSearch = query;
     this.search();
   }
+};
+
+/**
+ * Is there a search term in the search box?
+ * @private
+ * @returns {Boolean}
+ */
+HomeController.prototype._hasCurrentSearch = function() {
+  return this.currentSearch && this.currentSearch.trim().length > 0;
 };
 
 /**

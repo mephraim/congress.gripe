@@ -12,6 +12,41 @@
 
     <div class="search-card__loading-indicator mdl-spinner mdl-spinner--single-color mdl-js-spinner"
          ng-class="homeCtrl.getLoadingIndicatorClass()"></div>
+
+    <div class="search-help"
+         ng-show="homeCtrl.isHelpVisible()">
+      <div class="mdl-card__title search-help__title">
+        <h2 class="mdl-card__title-text">
+          Try using:
+        </h2>
+      </div>
+
+      <ul class="mdl-card__supporting-text search-help__search-options">
+        <li>
+          An Address
+          <a href="/?q=1600+Pennsylvania+Ave+NW,+Washington,+DC"
+            ng-click="homeCtrl.handleSearchLink()">
+            e.g. 1600 Pennsylvania Ave NW, Washington, DC »
+          </a>
+        </li>
+
+        <li>
+          A State
+          <a href="/?q=Illinois"
+            ng-click="homeCtrl.handleSearchLink()">
+            e.g. Illinois »
+          </a>
+        </li>
+
+        <li>
+          Their Name
+          <a href="/?q=Paul+Ryan"
+            ng-click="homeCtrl.handleSearchLink()">
+            e.g. Paul Ryan »
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="search-card__search-results-header mdl-color--light-blue-500"
