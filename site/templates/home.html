@@ -13,10 +13,16 @@
     <div class="search-card__loading-indicator mdl-spinner mdl-spinner--single-color mdl-js-spinner"
          ng-class="homeCtrl.getLoadingIndicatorClass()"></div>
 
+    <button class="search-card_clear-button"
+            ng-click="homeCtrl.handleClearButtonClick()"
+            ng-show="homeCtrl.isClearButttonVisible()">
+      <i class="material-icons">clear</i>
+    </button>
+
     <div class="search-help"
          ng-show="homeCtrl.isHelpVisible()">
       <div class="mdl-card__title search-help__title">
-        <h2 class="mdl-card__title-text">
+        <h2 class="mdl-card__title-text search-help__title-text">
           Try using:
         </h2>
       </div>
@@ -39,7 +45,7 @@
         </li>
 
         <li>
-          Their Name
+          A Name
           <a href="/?q=Paul+Ryan"
             ng-click="homeCtrl.handleSearchLink()">
             e.g. Paul Ryan »

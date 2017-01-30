@@ -1,5 +1,5 @@
 .search-card {
-  margin: 240px auto;
+  margin: 200px auto;
   min-height: auto;
   transition: margin .2s;
   width: 50%;
@@ -15,6 +15,24 @@
   right: 23px;
   top: 17px;
   width: 40px;
+}
+
+.search-card_clear-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 23px;
+}
+
+.search-card_clear-button:focus {
+  outline: none;
+}
+
+.search-card_clear-button i {
+  color: #888;
+  font-size: 29px;
 }
 
 .search-card__search-box-container {
@@ -124,6 +142,11 @@
     top: 3px;
   }
 
+  .search-card_clear-button {
+    right: 6px;
+    top: 2px;
+  }
+
   .search-card__loading-indicator {
     height: 20px;
     right: 12px;
@@ -144,7 +167,33 @@
 
 @media only screen and (max-width: 500px) {
   .search-card {
-    margin-top: 20%;
+    margin-top: 100px;
+  }
+
+  .search-help__title {
+    padding: 15px;
+  }
+
+  .search-help__title-text {
+    font-size: 18px;
+  }
+
+  .search-help__search-options {
+    font-size: 17px;
+    margin: 0 0 0 26px;
+  }
+
+  .search-help__search-options li {
+    margin-bottom: 15px;
+  }
+
+  .search-help a {
+    display: inline-block;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
   }
 
   .search-card__search-results-header .search-card__state-icon {

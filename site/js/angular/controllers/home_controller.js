@@ -156,6 +156,14 @@ HomeController.prototype.getStateUrl = function() {
 };
 
 /**
+ * Handles the search clear button.
+ */
+HomeController.prototype.handleClearButtonClick = function() {
+  this.currentSearch = null;
+  this.search();
+};
+
+/**
  * Handles keyup events in the search box.
  *
  * @listens Event
@@ -173,6 +181,14 @@ HomeController.prototype.handleSearchKeyup = function($event) {
   } else {
     this.$location.url(this.UrlService.getMemberUrl(this.getSearchResults()[0]));
   }
+};
+
+/**
+ * Should the clear button be visible?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isClearButttonVisible = function() {
+  return !this._searchInProgress && this._hasCurrentSearch();
 };
 
 /**
