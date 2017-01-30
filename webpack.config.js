@@ -6,14 +6,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
   entry: {
     app: './site/app.js'
-  },
-
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'assets/[hash].[name].js'
   },
 
   module: {
@@ -45,9 +39,6 @@ module.exports = {
       to: 'data/congress_members.json'
     }]),
 
-    // Pull any required CSS out into a main.css file
-    new ExtractTextPlugin('assets/[hash].main.css'),
-
     // This allows us to reference the generated files from within the template
     // using lodash syntax.
     new HtmlWebpackPlugin({
@@ -56,17 +47,6 @@ module.exports = {
     }),
 
     // Automatically inject Angular dependencies using @ngInject
-    new ngAnnotatePlugin({ add: true }),
-
-    // Optimize using Uglify
-    new webpack.optimize.UglifyJsPlugin({
-      compress: true
-    })
-  ],
-
-  devServer: {
-    compress: true,
-    historyApiFallback: true,
-    inline: false
-  }
+    new ngAnnotatePlugin({ add: true })
+  ]
 };

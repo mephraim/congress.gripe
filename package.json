@@ -26,7 +26,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --content-base build/",
-    "test": "./node_modules/karma/bin/karma start --auto-watch"
+    "start": "webpack-dev-server --config=webpack.config.dev.js --progress --content-base=build/",
+    "prod": "webpack --config=webpack.config.prod.js",
+    "test": "karma start --auto-watch"
   }
 }
