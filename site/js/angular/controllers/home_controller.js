@@ -14,6 +14,7 @@ function HomeController(
   MembersStoreService,
   PartyInfoService,
   StateInfoService,
+  SiteService,
   UrlService) {
 
   var self = this;
@@ -25,6 +26,7 @@ function HomeController(
   self.HangoutService = HangoutService;
   self.MembersStoreService = MembersStoreService;
   self.PartyInfoService = PartyInfoService;
+  self.SiteService = SiteService;
   self.StateInfoService = StateInfoService;
   self.UrlService = UrlService;
 
@@ -33,6 +35,7 @@ function HomeController(
 
   self.updateSearchFromUrl();
   self._initLocationUpdater();
+  self._initHeaderUpdater();
 }
 
 /**
@@ -124,7 +127,7 @@ HomeController.prototype.getPartyColorForMember = function(member) {
  * @returns {String[]}
  */
 HomeController.prototype.getSearchCardClass = function() {
-  if (this.hasSearchResults()) {
+  if (this._hasCurrentSearch()) {
     return ['collapsed'];
   }
 };
@@ -235,6 +238,14 @@ HomeController.prototype.isHelpVisible = function() {
 };
 
 /**
+ * Should the search header box be visible?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isSearchHeaderVisible = function() {
+  return !this._hasCurrentSearch();
+};
+
+/**
  * Handles a link to a search.
  *
  * NOTE: there's probably a way to just gracefully handle links to `?` links on
@@ -314,11 +325,26 @@ HomeController.prototype.updateSearchFromUrl = function() {
  * @returns {Boolean}
  */
 HomeController.prototype._hasCurrentSearch = function() {
-  return this.currentSearch && this.currentSearch.trim().length > 0;
+  return !!(this.currentSearch &&
+            this.currentSearch.trim().length > 0);
 };
 
 /**
- * Initializes watchers.
+ * Initializes a watcher that will hide/show the global site header.
+ * @private
+ */
+HomeController.prototype._initHeaderUpdater = function() {
+  var self = this;
+  self.$scope.$watch(function() {
+    return self._hasCurrentSearch();
+  }, function() {
+    self.SiteService.setSiteHeaderVisibility(
+      self._hasCurrentSearch());
+  });
+};
+
+/**
+ * Initializes location updated watcher.
  * @private
  */
 HomeController.prototype._initLocationUpdater = function() {

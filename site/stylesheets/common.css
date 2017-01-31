@@ -1,6 +1,16 @@
-.site-header a {
+@import url('https://fonts.googleapis.com/css?family=Ultra');
+
+.site-header {
+  background: #0776a9;
+}
+
+.site-header .site-header__text {
   color: #fff;
+  font-family: 'Ultra', serif;
+  font-size: 25px;
+  margin: 19px;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .site-header__icon {
@@ -10,7 +20,7 @@
 }
 
 .single-member {
-  margin: 150px auto;
+  margin: 20px auto;
   width: 800px;
 }
 
@@ -46,6 +56,11 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .site-header .site-header__text {
+    margin: 19px 0;
+    text-align: center;
+  }
+
   .member-list,
   .single-member {
     margin: 0 auto;

@@ -16,15 +16,13 @@
     Contact Congress | congress.gripe
   </title>
 </head>
-<body ng-app="CongressApp">
+<body ng-app="CongressApp" ng-controller="SiteController as siteCtrl" ng-cloak>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="site-header mdl-layout__header mdl-color--blue-grey-600">
-      <div class="mdl-layout__header-row">
-        <a href="/" class="mdl-layout-title">
-          <i class="material-icons site-header__icon">account_balance</i>
-          Contact a Congress Member
-        </a>
-      </div>
+    <header class="mdl-layout__header site-header"
+            ng-show="siteCtrl.isHeaderVisible()">
+      <a href="/" class="mdl-layout-title site-header__text">
+        Congress.Gripe
+      </a>
     </header>
 
     <main class="mdl-layout__content" ng-view autoscroll>

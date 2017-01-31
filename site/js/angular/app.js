@@ -8,6 +8,8 @@ require('angular').
     require('./controllers/home_controller.js')).
   controller('MemberController',
     require('./controllers/member_controller.js')).
+  controller('SiteController',
+    require('./controllers/site_controller.js')).
   controller('StateController',
     require('./controllers/state_controller.js')).
 
@@ -28,6 +30,8 @@ require('angular').
     require('./services/members_store_service.js')).
   service('PartyInfoService',
     require('./services/party_info_service.js')).
+  service('SiteService',
+    require('./services/site_service.js')).
   service('StateInfoService',
     require('./services/state_info_service.js')).
   service('UrlService',

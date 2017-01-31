@@ -1,7 +1,7 @@
 /**
  * @ngInject
  */
-function Run($timeout, $location, $rootScope, $window) {
+function Run($timeout, $location, $rootScope, $window, SiteService) {
   // Once a view has loaded, notify the JS code for Material Design Lite
   $rootScope.$on('$viewContentLoaded', function() {
     $window.componentHandler.upgradeDom();
@@ -9,6 +9,7 @@ function Run($timeout, $location, $rootScope, $window) {
 
   handle404Redirect();
   initAnalytics();
+  initSiteHeader();
 
   /**
    * Handle redirects from 404.html
@@ -39,6 +40,22 @@ function Run($timeout, $location, $rootScope, $window) {
     // Send a pageview when the page has changed.
     $rootScope.$on('$viewContentLoaded', function (event) {
       $window.ga('send', 'pageview', $location.path());
+    });
+  }
+
+  /**
+   * Initializes the default state for the site header.
+   * (There has to be a better way to do this)
+   */
+  function initSiteHeader() {
+    $rootScope.$on('$viewContentLoaded', function() {
+      // Hide the site header by default on the homepage, but show it by default
+      // everywhere else.
+      if ($location.path() == '/') {
+        SiteService.setSiteHeaderVisibility(false);
+      } else {
+        SiteService.setSiteHeaderVisibility(true);
+      }
     });
   }
 }

@@ -1,8 +1,19 @@
+.search-header {
+  color: #0776a9;
+  font-family: 'Ultra', serif;
+  font-size: 90px;
+  margin-top: 80px;
+  text-align: center;
+  text-shadow: -0.02em 0.02em #ddd,
+               -0.04em 0.04em #e8a0a0;
+  text-transform: uppercase;
+}
+
 .search-card {
-  margin: 200px auto;
+  margin: 90px auto;
   min-height: auto;
   transition: margin .2s;
-  width: 50%;
+  width: 60%;
 }
 
 .search-card.collapsed {
@@ -138,7 +149,12 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .search-header {
+    font-size: 60px;
+  }
+
   .search-card {
+    margin-top: 55px;
     width: 98%;
   }
 
@@ -181,8 +197,14 @@
 }
 
 @media only screen and (max-width: 500px) {
+  .search-header {
+    font-size: 27px;
+    margin-top: 25px;
+    text-shadow: none;
+  }
+
   .search-card {
-    margin-top: 100px;
+    margin-top: 22px;
   }
 
   .search-help__title {

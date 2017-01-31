@@ -1,7 +1,7 @@
 /**
  * @ngInject
  */
-function StateController($routeParams, MembersStoreService, StateInfoService) {
+function StateController($routeParams, $timeout, MembersStoreService, SiteService, StateInfoService) {
   var self = this;
   self.StateInfoService = StateInfoService;
   self.stateName = $routeParams.name.toLowerCase();
@@ -21,6 +21,10 @@ function StateController($routeParams, MembersStoreService, StateInfoService) {
       self.representatives = representatives;
     });
   }
+
+  $timeout(function() {
+    SiteService.setSiteHeaderVisibility(true);
+  });
 }
 
 /**
