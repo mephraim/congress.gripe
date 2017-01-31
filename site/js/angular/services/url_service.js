@@ -10,6 +10,7 @@ function UrlService($interpolate) {
   return {
     getDistrictUrl: getDistrictUrl,
     getMemberUrl: getMemberUrl,
+    getPhoneUrl: getPhoneUrl,
     getStateUrl: getStateUrl,
     getYouTubeUrl: getYouTubeUrl
   };
@@ -34,6 +35,14 @@ function UrlService($interpolate) {
       id: member.person.id,
       name: member.person.firstname + '+' + member.person.lastname
     });
+  }
+
+  /**
+   * Returns the url for a phone number (this can be used to trigger a phone
+   * call on a mobile device).
+   */
+  function getPhoneUrl(phoneNumber) {
+    return 'tel:' + phoneNumber;
   }
 
   /**

@@ -18,7 +18,6 @@
       <div class="member-card__hangout-button">
         <p>Call now for free</p>
         <hangout-button phone-number="memberCardCtrl.member().phone"></hangout-button>
-        <p>{{memberCardCtrl.member().phone}}</p>
       </div>
     </div>
 
@@ -27,8 +26,12 @@
       or
     </div>
 
-    <ul class="mdl-list member-card__contact-list"
-        ng-if="memberCardCtrl.hasContactItems()">
+    <ul class="mdl-list member-card__contact-list">
+      <member-card-contact-item href="memberCardCtrl.getPhoneUrl()"
+                                icon="phone"
+                                text="Dial {{memberCardCtrl.member().phone}}">
+      </member-card-contact-item>
+
       <member-card-contact-item href="memberCardCtrl.member().extra.contact_form"
                                 icon="mail"
                                 text="Contact by Email">

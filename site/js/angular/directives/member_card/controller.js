@@ -13,8 +13,18 @@ function MemberCardDirectiveController(UrlService) {
  */
 MemberCardDirectiveController.prototype.getMemberName = function() {
   return this.member() &&
-          [this.member().person.nickname || this.member().person.firstname,
-          this.member().person.lastname].join(' ');
+         [this.member().person.nickname || this.member().person.firstname,
+         this.member().person.lastname].join(' ');
+};
+
+/**
+ * Gets the url for a member's phone number.
+ * @returns {String}
+ */
+MemberCardDirectiveController.prototype.getPhoneUrl = function() {
+  return this.member() &&
+         this.member().phone &&
+         this.UrlService.getPhoneUrl(this.member().phone);
 };
 
 /**
@@ -37,6 +47,7 @@ MemberCardDirectiveController.prototype.hasContactItems = function() {
   }
 
   return _.some([
+    this.member().phone,
     this.member().extra && this.member().extra.contact_form,
     this.member().website,
     this.getYouTubeUrl()

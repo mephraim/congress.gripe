@@ -22,7 +22,7 @@
   color: #555;
 }
 
-.member-card__phone-icon {
+.member-card__phone .member-card__phone-icon {
   font-size: 120px;
   display: inline-block;
   vertical-align: top;
@@ -30,7 +30,7 @@
 
 .member-card__hangout-button {
   display: inline-block;
-  margin-top: 4px;
+  margin-top: 20px;
 }
 
 .member-card__hangout-button p {
