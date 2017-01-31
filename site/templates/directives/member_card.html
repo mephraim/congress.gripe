@@ -10,7 +10,8 @@
   <div class="mdl-card__supporting-text member-card__body">
     <img class="member-card_contact-picture"
          ng-src="https://www.govtrack.us/data/photos/{{memberCardCtrl.member().person.id}}-100px.jpeg"
-         width="100" />
+         width="100"
+         onerror="this.style.display='none'" />
 
     <div class="member-card__phone">
       <i class="material-icons member-card__phone-icon">phone</i>
