@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 /**
  * @ngInject
  */
@@ -23,6 +25,22 @@ MemberCardDirectiveController.prototype.getYouTubeUrl = function() {
   return this.member() &&
          this.member().person.youtubeid &&
          this.UrlService.getYouTubeUrl(this.member().person.youtubeid);
+};
+
+/**
+ * Does this member have any contact items to show?
+ * @returns {Boolean}
+ */
+MemberCardDirectiveController.prototype.hasContactItems = function() {
+  if (!this.member()) {
+    return false;
+  }
+
+  return _.some([
+    this.member().extra && this.member().extra.contact_form,
+    this.member().website,
+    this.getYouTubeUrl()
+  ]);
 };
 
 module.exports = MemberCardDirectiveController;

@@ -21,11 +21,13 @@
       </div>
     </div>
 
-    <div class="member-card__or">
+    <div class="member-card__or"
+         ng-if="memberCardCtrl.hasContactItems()">
       or
     </div>
 
-    <ul class="mdl-list member-card__contact-list">
+    <ul class="mdl-list member-card__contact-list"
+        ng-if="memberCardCtrl.hasContactItems()">
       <member-card-contact-item href="memberCardCtrl.member().extra.contact_form"
                                 icon="mail"
                                 text="Contact by Email">
