@@ -1,10 +1,4 @@
-module.exports = {
- "meta": {
-  "limit": 2,
-  "offset": 0,
-  "total_count": 543
- },
- "objects": [
+module.exports = [
   {
    "caucus": null,
    "congress_numbers": [
@@ -233,5 +227,4 @@ module.exports = {
      "fullStateName": "Iowa"
    }
   }
- ]
-};
+];

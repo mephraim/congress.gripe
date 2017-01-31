@@ -142,8 +142,8 @@ MembersStore.prototype.search = function(query) {
  * @param {Object[]}
  */
 MembersStore.prototype._loadData = function(data) {
-  this._members = data.objects;
-  this._memberFuse = new Fuse(data.objects, {
+  this._members = data;
+  this._memberFuse = new Fuse(data, {
     distance: 100,
     location: 0,
     maxPatternLength: 32,
