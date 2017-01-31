@@ -8,6 +8,7 @@ function Run($timeout, $location, $rootScope, $window) {
   });
 
   handle404Redirect();
+  initAnalytics();
 
   /**
    * Handle redirects from 404.html
@@ -26,6 +27,19 @@ function Run($timeout, $location, $rootScope, $window) {
         $location.replace();
       }
     }, 0);
+  }
+
+  /**
+   * Initializes Google Analytics.
+   */
+  function initAnalytics() {
+    // Initialize
+    $window.ga('create', 'UA-91161539-1', 'auto');
+
+    // Send a pageview when the page has changed.
+    $rootScope.$on('$viewContentLoaded', function (event) {
+      $window.ga('send', 'pageview', $location.path());
+    });
   }
 }
 
