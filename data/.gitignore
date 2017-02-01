@@ -1,9 +1,0 @@
-*
-!.gitignore
-
-# Hang on to Congress Members, just in case it's not always available.
-!congress_members.json
-
-# Hang on to the raw Congressional Districts file so we don't
-# have to download it again.
-!congressional_districts.txt

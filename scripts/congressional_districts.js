@@ -45,6 +45,6 @@ function _formatResultForJSON(result) {
     district: parseInt(result.GEOID.toString().substr(2)),
     lat: result.INTPTLAT,
     lng: result.INTPTLONG,
-    state: result.USPS 
+    state: result.USPS
   };
 }
