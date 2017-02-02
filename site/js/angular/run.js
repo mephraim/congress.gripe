@@ -34,6 +34,10 @@ function Run($timeout, $location, $rootScope, $window, SiteService) {
    * Initializes Google Analytics.
    */
   function initAnalytics() {
+    if (!$window.ga) {
+      return;
+    }
+
     // Initialize
     $window.ga('create', 'UA-91161539-1', 'auto');
 

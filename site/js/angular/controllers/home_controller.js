@@ -9,10 +9,9 @@ function HomeController(
   $location,
   $scope,
   $timeout,
-  CensusService,
   HangoutService,
-  MembersStoreService,
   PartyInfoService,
+  SearchService,
   StateInfoService,
   SiteService,
   UrlService) {
@@ -22,10 +21,9 @@ function HomeController(
   self.$scope = $scope;
   self.$timeout = $timeout;
 
-  self.CensusService = CensusService;
   self.HangoutService = HangoutService;
-  self.MembersStoreService = MembersStoreService;
   self.PartyInfoService = PartyInfoService;
+  self.SearchService = SearchService;
   self.SiteService = SiteService;
   self.StateInfoService = StateInfoService;
   self.UrlService = UrlService;
@@ -287,25 +285,18 @@ HomeController.prototype.search = function() {
 
   delete this.currentCongressionalDistrict;
 
-  if (self.MembersStoreService.isValidNameSearch(self.currentSearch)) {
-    self.MembersStoreService.search(self.currentSearch).then(function(members) {
-      self._searchResults = members;
-    });
-  }
+  self._searchInProgress = true;
+  self.SearchService.search(self.currentSearch).then(function(result) {
+    if (result.district) {
+      self.currentCongressionalDistrict = result.district;
+    }
 
-  if (self.MembersStoreService.isValidAddressSearch(self.currentSearch)) {
-    self._searchInProgress = true;
-    self.CensusService.getCongressionalDistrict(self.currentSearch).then(function(response) {
-      self.currentCongressionalDistrict = response;
-      self.MembersStoreService.findAllForDistrict(response.state, response.number).then(function(members) {
-        self._searchResults = members;
-      });
-    }, function() {
-      delete self.currentCongressionalDistrict;
-    }).finally(function() {
-      self._searchInProgress = false;
-    });
-  }
+    self._searchResults = result.members;
+  }, function() {
+    delete self.currentCongressionalDistrict;
+  }).finally(function() {
+    self._searchInProgress = false;
+  });
 };
 
 /**

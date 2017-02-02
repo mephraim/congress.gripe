@@ -2,9 +2,6 @@ var _ = require('underscore');
 var stateInfo = require('./state_info.js');
 var Fuse = require('fuse.js');
 
-var MIN_ADDRESS_SEARCH_LENGTH = 3;
-var MAX_NAME_SEARCH_LENGTH = 4;
-
 var ROLE_TYPE_REPRESENTATIVE = 'representative';
 var ROLE_TYPE_SENATOR = 'senator';
 
@@ -18,35 +15,6 @@ function MembersStore(data) {
 
 MembersStore.ROLE_TYPE_REPRESENTATIVE = ROLE_TYPE_REPRESENTATIVE;
 MembersStore.ROLE_TYPE_SENATOR = ROLE_TYPE_SENATOR;
-
-/**
- * Can this query be used to search for an address?
- * The Geolocation API requires a minimum number of words to successfully search
- * for an address.
- *
- * @param {String} query
- * @returns {Boolean}
- */
-MembersStore.isValidAddressSearch = function(query) {
-  return query &&
-         !_.isEmpty(query.trim()) &&
-         query.trim().split(' ').length >= MIN_ADDRESS_SEARCH_LENGTH;
-};
-
-/**
- * Can this query be used to search for a name?
- *
- * Some search strings are going to be very slow to search using the Fuse library
- * so restrict the length of names that will be searched using it.
- *
- * @param {String} query
- * @returns {Boolean}
- */
-MembersStore.isValidNameSearch = function(query) {
-  return query &&
-         !_.isEmpty(query.trim()) &&
-         query.trim().split(' ').length <= MAX_NAME_SEARCH_LENGTH;
-};
 
 /**
  * Find a member by their govtrack ID.

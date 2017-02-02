@@ -30,6 +30,8 @@ require('angular').
     require('./services/members_store_service.js')).
   service('PartyInfoService',
     require('./services/party_info_service.js')).
+  service('SearchService',
+    require('./services/search_service.js')).
   service('SiteService',
     require('./services/site_service.js')).
   service('StateInfoService',

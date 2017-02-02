@@ -81,42 +81,6 @@ describe('MembersStore', function() {
     });
   });
 
-  describe('isValidNameSearch', function() {
-    it('returns true for queries with <= 4 words', function() {
-      expect(MembersStore.isValidNameSearch('Mr. Chuck Grassley Jr.')).toBeTruthy();
-    });
-
-    it('returns false for queries with > 4 words', function() {
-      expect(MembersStore.isValidNameSearch('This is more than 4 words')).toBeFalsy();
-    });
-
-    it('returns false for empty string', function() {
-      expect(MembersStore.isValidNameSearch('')).toBeFalsy();
-    });
-
-   it('returns false for undefined strings', function() {
-      expect(MembersStore.isValidNameSearch()).toBeFalsy();
-    });
-  });
-
-  describe('isValidAddressSearch', function() {
-    it('returns true for queries with >= 3 words', function() {
-      expect(MembersStore.isValidAddressSearch('150 North Chicago')).toBeTruthy();
-    });
-
-    it('returns false for queries with < 3 words', function() {
-      expect(MembersStore.isValidAddressSearch('Chuck Grassley')).toBeFalsy();
-    });
-
-    it('returns false for empty strings', function() {
-      expect(MembersStore.isValidAddressSearch('')).toBeFalsy();
-    });
-
-    it('returns false for undefined strings', function() {
-      expect(MembersStore.isValidAddressSearch()).toBeFalsy();
-    });
-  });
-
   describe('search', function() {
     it('finds a member by first name', function() {
       var ronalds = subject.search('Ronald');
