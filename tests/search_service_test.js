@@ -65,4 +65,38 @@ describe('SearchService', function() {
       expect(service.isValidStateSearch('Iowa')).toBeTruthy();
     });
   });
+
+  describe('isValidZipcodeSearch', function() {
+    it('returns false for an empty string', function() {
+      expect(service.isValidZipcodeSearch('')).toBeFalsy();
+    });
+
+    it('returns false for an undefined string', function() {
+      expect(service.isValidZipcodeSearch()).toBeFalsy();
+    });
+
+    it('returns false for a non-number string', function() {
+      expect(service.isValidZipcodeSearch('not number')).toBeFalsy();
+    });
+
+    it('returns false for a number that is too short to be a zipcode', function() {
+      expect(service.isValidZipcodeSearch(30)).toBeFalsy();
+    });
+
+    it('returns false for a string that is too long to be a zipcode', function() {
+      expect(service.isValidZipcodeSearch(300000)).toBeFalsy();
+    });
+
+    it('returns false for a string that has non-numeric characters in it', function() {
+      expect(service.isValidZipcodeSearch('4432 zip')).toBeFalsy();
+    });
+
+    it('returns true for a string that can be turned into a zipcode', function() {
+      expect(service.isValidZipcodeSearch('00101')).toBeTruthy();
+    });
+
+    it('returns true for a number that could be a valid zipcode', function() {
+      expect(service.isValidZipcodeSearch(50010)).toBeTruthy();
+    });
+  });
 });

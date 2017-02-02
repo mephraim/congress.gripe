@@ -37,6 +37,9 @@ module.exports = {
     },{
       from: './data/congress_members.json',
       to: 'data/congress_members.json'
+    },{
+      from: './data/congressional_districts_by_zipcode.json',
+      to: 'data/congressional_districts_by_zipcode.json'
     }]),
 
     // This allows us to reference the generated files from within the template

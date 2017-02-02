@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('indexZipCodeRawData', 'Grabs a snapshot of the raw zip code => district files', function() {
+  grunt.registerTask('indexRawZipcodeDistrictData', 'Grabs a snapshot of the raw zip code => district files', function() {
     var done = this.async();
     congressDistrictsByZipCode.getRawDataFiles().then(function(data) {
       data.forEach(function(item) {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('parseRawDistrictData', 'Parses the raw zip code => district data and indexes it as JSON', function() {
+  grunt.registerTask('parseRawZipcodeDistrictData', 'Parses the raw zip code => district data and indexes it as JSON', function() {
     var done = this.async();
     congressDistrictsByZipCode.parseRawDistrictData().then(function(data) {
       grunt.file.write('data/congressional_districts_by_zipcode.json', JSON.stringify(data));

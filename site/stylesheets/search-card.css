@@ -148,6 +148,16 @@
   margin-left: 10px;
 }
 
+.search-card__search-results-footer {
+  background: #0776a9;
+  color: #fff;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 22px;
+  padding: 20px;
+}
+
 @media only screen and (max-width: 900px) {
   .search-header {
     font-size: 60px;

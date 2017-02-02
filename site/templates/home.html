@@ -42,6 +42,14 @@
         </li>
 
         <li>
+          A Zip Code
+          <a href="/?q=53545"
+            ng-click="homeCtrl.handleSearchLink()">
+            e.g. 53545 »
+          </a>
+        </li>
+
+        <li>
           A State
           <a href="/?q=Illinois"
             ng-click="homeCtrl.handleSearchLink()">
@@ -110,5 +118,12 @@
       </a>
     </li>
   </ul>
+
+  <div class="search-card__search-results-footer"
+       ng-show="homeCtrl.isZipcodeFooterVisible()">
+    Searching by zip code? Zip codes don't always match up exactly with
+    congressional districts. For better results, try searching for a full
+    address.
+  </div>
 </div>
 

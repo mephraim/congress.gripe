@@ -37,4 +37,6 @@ require('angular').
   service('StateInfoService',
     require('./services/state_info_service.js')).
   service('UrlService',
-    require('./services/url_service.js'));
+    require('./services/url_service.js')).
+  service('ZipcodeService',
+    require('./services/zipcode_service.js'));

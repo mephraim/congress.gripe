@@ -1,3 +1,5 @@
+// Zipcode to Congressional District Map files available at:
+// https://www.census.gov/geo/maps-data/data/cd_state.html
 module.exports = {
   AL: 'http://www2.census.gov/geo/relfiles/cdsld13/01/zc_cd_delim_01.txt',
   AZ: 'http://www2.census.gov/geo/relfiles/cdsld13/04/zc_cd_delim_04.txt',

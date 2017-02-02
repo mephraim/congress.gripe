@@ -72,7 +72,10 @@ MembersStore.prototype.findRepresentativeForDistrict = function(state, district)
   return _.find(this._members, function(member) {
     return member.role_type == ROLE_TYPE_REPRESENTATIVE &&
            member.state === state &&
-           member.district === district;
+           // If the district isn't specified,return the first representative
+           // found for the state (some states only have one district and don't
+           // have a district number)
+           (!district || member.district === district);
   });
 };
 

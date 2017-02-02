@@ -3,6 +3,7 @@ var fs = require('fs');
 var Promise = require('promise');
 var request = require('request');
 var urls = require('../data/zip_code_congressional_district_urls.js');
+var singleDistrictStates = require('../data/zip_code_congressional_district_single_states.js');
 
 module.exports = {
   getRawDataFiles: getRawDataFiles,
@@ -33,14 +34,18 @@ function parseRawDistrictData() {
   return new Promise(function(resolve) {
     // Build up a collection of parsers that will read in the zip code => district
     // csv files and return a zipcode map object for each state.
-    var parsers = Object.keys(urls).map(function(state) {
+    var rawDataParsers = Object.keys(urls).map(function(state) {
       return _getZipMapFromRawData(state);
     });
 
     // Once all of the parsers have completed, resolve with one big object that
     // contains all of the zipcode to district data.
-    Promise.all(parsers).then(function(zipMaps) {
-      resolve(Object.assign.apply(Object, zipMaps));
+    Promise.all(rawDataParsers).then(function(zipMaps) {
+      var mapFromRawData = Object.assign.apply(Object, zipMaps);
+
+      // Join the single district state data in with the other parsed district
+      // data before resolving
+      resolve(Object.assign(mapFromRawData, _getZipMapFromSingleDistrictStates()));
     });
   });
 }
@@ -59,8 +64,8 @@ function _getZipMap(data, state) {
     // Only store the first entry for each zipcode, as there may be multiple
     // districts per zipcode. Matching by zipcode is not very accurate anyway
     // and we will warn the user in the UI.
-    if (!zipMap[item.ZCTA]) {
-      zipMap[item.ZCTA] = {
+    if (!zipMap[item.ZCTA.toString()]) {
+      zipMap[item.ZCTA.toString()] = {
         district: item.CongressionalDistrict,
         state: state
       };
@@ -91,6 +96,29 @@ function _getZipMapFromRawData(state) {
     });
   });
 };
+
+/**
+ * A few states only have one congressional district, so the census site doesn't
+ * have any data files from them. Pull in the zipcodes from a separate file for
+ * these states and create a map that only includes the state (since there's no
+ * district number to include).
+ *
+ * @private
+ * @returns {Object}
+ */
+function _getZipMapFromSingleDistrictStates() {
+  var zipcodeMap = {};
+
+  Object.keys(singleDistrictStates).forEach(function(state) {
+    singleDistrictStates[state].forEach(function(zipcode) {
+      zipcodeMap[zipcode] = {
+        state: state
+      }
+    });
+  });
+
+  return zipcodeMap;
+}
 
 /**
  * Download the raw census zipcode to congressional district data.

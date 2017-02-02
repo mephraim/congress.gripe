@@ -56,8 +56,16 @@ HomeController.prototype.getCongressionalDistrictHeader = function() {
     return;
   }
 
-  return [this.StateInfoService.getName(this.currentCongressionalDistrict.state),
-          this.currentCongressionalDistrict.name].join(' ');
+  var headerParts = [this.StateInfoService.getName(this.currentCongressionalDistrict.state)];
+
+  // Some states only have one congresional district and therefore won't have a
+  // district number. Leave the number part out of the header for these states.
+  if (this.currentCongressionalDistrict.number) {
+    headerParts.push('Congressional District');
+    headerParts.push(this.currentCongressionalDistrict.number);
+  }
+
+  return headerParts.join(' ');
 };
 
 /**
@@ -65,9 +73,20 @@ HomeController.prototype.getCongressionalDistrictHeader = function() {
  * @returns {String}
  */
 HomeController.prototype.getDistrictUrl = function() {
-  return this.currentCongressionalDistrict && this.UrlService.getDistrictUrl(
-    this.currentCongressionalDistrict.state,
-    this.currentCongressionalDistrict.number);
+  if (!this.currentCongressionalDistrict) {
+    return;
+  }
+
+  if (this.currentCongressionalDistrict.number) {
+    return this.UrlService.getDistrictUrl(
+             this.currentCongressionalDistrict.state,
+             this.currentCongressionalDistrict.number);
+  }
+
+  // If a congressional district doesn't have a number specified, just return the
+  // url for the state.
+  return this.UrlService.getStateUrl(
+           this.StateInfoService.getName(this.currentCongressionalDistrict.state));
 };
 
 /**
@@ -271,6 +290,16 @@ HomeController.prototype.hasSearchResults = function() {
 HomeController.prototype.isCurrentSearchForState = function() {
   return this.currentSearch &&
          this.StateInfoService.isState(this.currentSearch.trim());
+};
+
+/**
+ * Should the zipcode footer be visible?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isZipcodeFooterVisible = function() {
+  return this._hasCurrentSearch() &&
+         this.hasSearchResults() &&
+         this.SearchService.isValidZipcodeSearch(this.currentSearch.trim());
 };
 
 /**
