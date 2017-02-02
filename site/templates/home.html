@@ -78,6 +78,12 @@
     </button>
   </div>
 
+  <div class="search-card__slow-search-header"
+       ng-show="homeCtrl.isSlowSearchHeaderVisible()">
+    <i class="material-icons">cached</i>
+    Still searching. Full addresses can take a little longer to search for.
+  </div>
+
   <div class="search-card__search-results-header"
        ng-show="homeCtrl.isCurrentSearchForState()">
     <a href="{{homeCtrl.getStateUrl()}}">

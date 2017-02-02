@@ -4,12 +4,13 @@ var MAX_NAME_SEARCH_LENGTH = 4;
 var MAX_ZIPCODE_LENGTH = 5;
 var MIN_ADDRESS_SEARCH_LENGTH = 3;
 var MIN_ZIPCODE_LENGTH = 3;
+var SLOW_SEARCH_TIMEOUT_MS = 2000;
 var ZIPCODE_REGEX = /^\d+$/;
 
 /**
  * @ngInject
  */
-function SearchService($q, CensusService, MembersStoreService, StateInfoService, ZipcodeService) {
+function SearchService($q, $timeout, CensusService, MembersStoreService, StateInfoService, ZipcodeService) {
   return {
     isValidAddressSearch: isValidAddressSearch,
     isValidNameSearch: isValidNameSearch,
@@ -27,22 +28,38 @@ function SearchService($q, CensusService, MembersStoreService, StateInfoService,
    * @returns {Promise}
    */
   function search(query) {
-    return $q(function(resolve, reject) {
-      if (isValidZipcodeSearch(query)) {
-        searchByZipcode(query).then(resolve, reject);
-      } else if (isValidNameSearch(query)) {
-        MembersStoreService.search(query).then(function(members) {
-          resolve({
-            members: members
-          });
+    // Use deferred instead of the $q shorthand method because we need to call
+    // the `notify` method for slow searches.
+    var deferred = $q.defer();
+
+    if (isValidZipcodeSearch(query)) {
+      searchByZipcode(query).then(deferred.resolve, deferred.reject);
+    } else if (isValidNameSearch(query)) {
+      MembersStoreService.search(query).then(function(members) {
+        deferred.resolve({
+          members: members
         });
-      }
-      else if (isValidAddressSearch(query)) {
-        searchByAddress(query).then(resolve, reject);
-      } else {
-        reject();
-      }
-    });
+      });
+    }
+    else if (isValidAddressSearch(query)) {
+      // Searching by address will take longer than other types of searches,
+      // so notify the caller that some kind of status should be displayed.
+      var slowTimeout = $timeout(function() {
+        deferred.notify();
+      }, SLOW_SEARCH_TIMEOUT_MS);
+
+      searchByAddress(query).then(function(data) {
+        deferred.resolve(data);
+      }, function() {
+        deferred.reject();
+      }, function() {
+        $timeout.cancel(slowTimeout);
+      });
+    } else {
+      deferred.reject();
+    }
+
+    return deferred.promise;
   }
 
   /**

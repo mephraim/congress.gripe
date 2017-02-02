@@ -84,6 +84,23 @@
   top: 6px;
 }
 
+.search-card__slow-search-header {
+  background: #0776a9;
+  color: #fff;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 22px;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-card__slow-search-header i {
+  display: inline-block;
+  margin-top: -3px;
+  vertical-align: middle;
+}
+
 .search-card__search-results {
   margin: 0;
 }

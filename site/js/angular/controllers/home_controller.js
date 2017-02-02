@@ -199,6 +199,19 @@ HomeController.prototype.handleClearButtonClick = function() {
 };
 
 /**
+ * Handles a link to a search.
+ *
+ * NOTE: there's probably a way to just gracefully handle links to `?` links on
+ * the homepage, but I haven't found it yet.
+ */
+HomeController.prototype.handleSearchLink = function() {
+  var self = this;
+  self.$timeout(function() {
+    self.updateSearchFromUrl();
+  });
+};
+
+/**
  * Handles keyup events in the search box.
  *
  * @listens Event
@@ -229,11 +242,37 @@ HomeController.prototype.handleSearchKeyup = function($event) {
 };
 
 /**
+ * Are there search results to display?
+ * @returns {Boolean}
+ */
+HomeController.prototype.hasSearchResults = function() {
+  return this.getSearchResults().length > 0;
+};
+
+
+/**
  * Should the clear button be visible?
  * @returns {Boolean}
  */
 HomeController.prototype.isClearButttonVisible = function() {
   return !this._searchInProgress && this._hasCurrentSearch();
+};
+
+/**
+ * Is the user searching for a state?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isCurrentSearchForState = function() {
+  return this.currentSearch &&
+         this.StateInfoService.isState(this.currentSearch.trim());
+};
+
+/**
+ * Should the help box be visible?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isHelpVisible = function() {
+  return !this._hasCurrentSearch();
 };
 
 /**
@@ -247,14 +286,6 @@ HomeController.prototype.isNoResultsVisible = function() {
 };
 
 /**
- * Should the help box be visible?
- * @returns {Boolean}
- */
-HomeController.prototype.isHelpVisible = function() {
-  return !this._hasCurrentSearch();
-};
-
-/**
  * Should the search header box be visible?
  * @returns {Boolean}
  */
@@ -263,33 +294,11 @@ HomeController.prototype.isSearchHeaderVisible = function() {
 };
 
 /**
- * Handles a link to a search.
- *
- * NOTE: there's probably a way to just gracefully handle links to `?` links on
- * the homepage, but I haven't found it yet.
- */
-HomeController.prototype.handleSearchLink = function() {
-  var self = this;
-  self.$timeout(function() {
-    self.updateSearchFromUrl();
-  });
-};
-
-/**
- * Are there search results to display?
+ * Should the header for a slow search be displayed?
  * @returns {Boolean}
  */
-HomeController.prototype.hasSearchResults = function() {
-  return this.getSearchResults().length > 0;
-};
-
-/**
- * Is the user searching for a state?
- * @returns {Boolean}
- */
-HomeController.prototype.isCurrentSearchForState = function() {
-  return this.currentSearch &&
-         this.StateInfoService.isState(this.currentSearch.trim());
+HomeController.prototype.isSlowSearchHeaderVisible = function() {
+  return this._slowSearchInProgress;
 };
 
 /**
@@ -321,10 +330,19 @@ HomeController.prototype.search = function() {
     }
 
     self._searchResults = result.members;
+  // If the search fails, clear the current district and results
   }, function() {
+    delete self._searchResults;
     delete self.currentCongressionalDistrict;
+  // If the notify callback is called, it means the search is going to take a little more
+  // time to complete, so display an extra warning if the search is still going.
+  }, function() {
+    if (self._searchInProgress) {
+      self._slowSearchInProgress = true;
+    }
   }).finally(function() {
     self._searchInProgress = false;
+    self._slowSearchInProgress = false;
   });
 };
 
