@@ -1,16 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Ultra');
+@import url('https://fonts.googleapis.com/css?family=Kadwa:700|Ultra');
 
 .site-header {
   background: #0776a9;
 }
 
-.site-header .site-header__text {
+.site-header__row {
+  padding: 0;
+}
+
+.site-header__text {
+  margin: 0 15px;
+}
+
+.site-header__text a {
   color: #fff;
   font-family: 'Ultra', serif;
   font-size: 25px;
-  margin: 19px;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.site-header__subtext {
+  border-left: 1px solid #03a9f4;
+  color: #fff;
+  font-family: 'Kadwa', serif;
+  font-size: 20px;
+  margin: 0;
+  padding-left: 15px;
 }
 
 .site-header__icon {
@@ -56,9 +72,17 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .site-header .site-header__text {
-    margin: 19px 0;
+  .site-header__row {
+    display: block;
     text-align: center;
+  }
+
+  .site-header .site-header__text {
+    margin: 17px 0;
+  }
+
+  .site-header__subtext {
+    display: none;
   }
 
   .member-list,

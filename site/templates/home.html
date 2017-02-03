@@ -1,7 +1,12 @@
-<div class="search-header"
+<h1 class="search-header"
      ng-show="homeCtrl.isSearchHeaderVisible()">
   Congress.Gripe
-</div>
+</h1>
+
+<h2 class="search-subheader"
+    ng-show="homeCtrl.isSearchHeaderVisible()">
+  Quickly find and contact a member of congress
+</h2>
 
 <div class="search-card mdl-card mdl-shadow--2dp"
      ng-class="homeCtrl.getSearchCardClass()">
@@ -28,14 +33,14 @@
 
     <div class="search-help"
          ng-show="homeCtrl.isHelpVisible()">
-      <div class="mdl-card__title search-help__title">
-        <h2 class="mdl-card__title-text search-help__title-text">
-          Try using:
-        </h2>
-      </div>
+      <h2 class="mdl-card__title-text search-help__title-text">
+        Search for a member of congress using:
+      </h2>
 
       <ul class="mdl-card__supporting-text search-help__search-options">
         <li>
+          <i class="material-icons">search</i>
+
           An Address
           <a href="/?q=601+W+Broadway,+Louisville+KY"
             ng-click="homeCtrl.handleSearchLink()">
@@ -44,6 +49,8 @@
         </li>
 
         <li>
+          <i class="material-icons">search</i>
+
           A Zip Code
           <a href="/?q=53545"
             ng-click="homeCtrl.handleSearchLink()">
@@ -52,6 +59,8 @@
         </li>
 
         <li>
+          <i class="material-icons">search</i>
+
           A State
           <a href="/?q=Illinois"
             ng-click="homeCtrl.handleSearchLink()">
@@ -60,6 +69,8 @@
         </li>
 
         <li>
+          <i class="material-icons">search</i>
+
           A Name
           <a href="/?q=Ryan"
             ng-click="homeCtrl.handleSearchLink()">

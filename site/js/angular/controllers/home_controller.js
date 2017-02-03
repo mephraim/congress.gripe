@@ -38,13 +38,16 @@ function HomeController(
 
   self._searchBoxElement =
     $document[0].querySelector('.search-card__search-box');
-  self._searchBoxElement.focus();
 
   self.updateSearchFromUrl();
   self._initLocationUpdater();
   self._initHeaderUpdater();
 
   self.exampleSearch = self._getExampleSearch();
+
+  $timeout(function() {
+    self._searchBoxElement.focus();
+  });
 }
 
 /**
