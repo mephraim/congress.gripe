@@ -41,6 +41,7 @@ function HomeController(
 
   self.updateSearchFromUrl();
   self._initLocationUpdater();
+  self._initLocationWatcher();
   self._initHeaderUpdater();
 
   self.exampleSearch = self._getExampleSearch();
@@ -419,6 +420,22 @@ HomeController.prototype._initLocationUpdater = function() {
     self.$location.search('q', self.currentSearch);
     self.$location.replace();
   });
+};
+
+/**
+ * Initializes a watcher that will clear the search results if there isn't a
+ * query in url.
+ */
+HomeController.prototype._initLocationWatcher = function() {
+  var self = this;
+  self.$scope.$watch(function() {
+    return self.$location.search();
+  }, function() {
+    if (_.keys(self.$location.search()).length < 1) {
+      self.clearResults();
+      self.currentSearch = '';
+    }
+  }, true);
 };
 
 module.exports = HomeController;
