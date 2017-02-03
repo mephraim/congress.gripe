@@ -1,5 +1,13 @@
+var _ = require('underscore');
+
 var ENTER_KEY_CODE = 13;
 var ESC_KEY_CODE = 27;
+
+var EXAMPLE_SEARCHES = [
+  'Mitch McConnell',
+  'Paul Ryan',
+  'Ted Cruz'
+];
 
 /**
  * @ngInject
@@ -30,10 +38,13 @@ function HomeController(
 
   self._searchBoxElement =
     $document[0].querySelector('.search-card__search-box');
+  self._searchBoxElement.focus();
 
   self.updateSearchFromUrl();
   self._initLocationUpdater();
   self._initHeaderUpdater();
+
+  self.exampleSearch = self._getExampleSearch();
 }
 
 /**
@@ -355,6 +366,14 @@ HomeController.prototype.updateSearchFromUrl = function() {
     this.currentSearch = query;
     this.search();
   }
+};
+
+/**
+ * Gets a random example search to display.
+ * @returns {String}
+ */
+HomeController.prototype._getExampleSearch = function() {
+  return _.sample(EXAMPLE_SEARCHES);
 };
 
 /**

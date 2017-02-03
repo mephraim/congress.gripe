@@ -7,10 +7,12 @@
      ng-class="homeCtrl.getSearchCardClass()">
 
   <div class="search-card__search-box-container">
+    <i class="material-icons search-card__search-icon">search</i>
+
     <input class="search-card__search-box mdl-textfield__input"
            autofocus
+           placeholder="example: {{homeCtrl.exampleSearch}}"
            type="text"
-           placeholder="Find a member of congress"
            ng-change="homeCtrl.search()"
            ng-keyup="homeCtrl.handleSearchKeyup($event)"
            ng-model="homeCtrl.currentSearch">

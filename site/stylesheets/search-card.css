@@ -35,6 +35,7 @@
   position: absolute;
   right: 15px;
   top: 19px;
+  z-index: 2;
 }
 
 .search-card_clear-button:focus {
@@ -50,17 +51,48 @@
   position: relative;
 }
 
+.search-card__search-icon {
+  color: #ddd;
+  font-size: 40px;
+  left: 16px;
+  position: absolute;
+  top: 16px;
+  /* Make sure the search icon is below the textbox */
+  z-index: 1;
+}
+
 .search-card__search-box {
+  /* Make this transparent so the search icon shows through. */
+  background: transparent;
   color: #555;
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-size: 36px;
   font-weight: 100;
   margin: 0 auto;
   outline: none;
-  padding: 15px;
-  text-align: center;
+  padding: 15px 63px;
+  position: relative;
+  /* Make sure the searchbox text precedent over the search icon when clicking on it */
+  z-index: 2;
   width: 100%;
 }
+
+.search-card__search-box::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+.search-card__search-box::-moz-placeholder {
+  color: #ccc;
+}
+
+.search-card__search-box:-ms-input-placeholder {
+  color: #ccc;
+}
+
+.search-card__search-box:-moz-placeholder {
+  color: #ccc;
+}
+
 
 .search-card__search-results-header {
   background-color: #03a9f4;
@@ -185,9 +217,15 @@
     width: 98%;
   }
 
+  .search-card__search-icon {
+    font-size: 25px;
+    left: 7px;
+    top: 7px;
+  }
+
   .search-card__search-box {
     font-size: 20px;
-    padding: 7px;
+    padding: 7px 35px;
   }
 
   .search-card__search-results-header {
