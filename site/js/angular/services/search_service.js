@@ -5,6 +5,7 @@ var MAX_ZIPCODE_LENGTH = 5;
 var MIN_ADDRESS_SEARCH_LENGTH = 3;
 var MIN_ZIPCODE_LENGTH = 3;
 var SLOW_SEARCH_TIMEOUT_MS = 2000;
+var VERY_SLOW_SEARCH_TIMETOUT_MS = 10000;
 var ZIPCODE_REGEX = /^\d+$/;
 
 /**
@@ -48,12 +49,19 @@ function SearchService($q, $timeout, CensusService, MembersStoreService, StateIn
         deferred.notify();
       }, SLOW_SEARCH_TIMEOUT_MS);
 
+      // If the search is taking a really long time, notify the caller.
+      var verySlowTimeout = $timeout(function() {
+        $timeout.cancel(slowTimeout);
+        deferred.notify(true);
+      }, VERY_SLOW_SEARCH_TIMETOUT_MS);
+
       searchByAddress(query).then(function(data) {
         deferred.resolve(data);
       }, function() {
         deferred.reject();
       }, function() {
         $timeout.cancel(slowTimeout);
+        $timeout.cancel(verySlowTimeout);
       });
     } else {
       deferred.reject();

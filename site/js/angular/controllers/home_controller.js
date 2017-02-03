@@ -313,7 +313,17 @@ HomeController.prototype.isSearchHeaderVisible = function() {
  * @returns {Boolean}
  */
 HomeController.prototype.isSlowSearchHeaderVisible = function() {
-  return this._slowSearchInProgress;
+  return this._searchInProgress &&
+         !this._verySlowSearchInProgress &&
+         this._slowSearchInProgress;
+};
+
+/**
+ * Should the header for a very slow search be displayed?
+ * @returns {Boolean}
+ */
+HomeController.prototype.isVerySlowSearchHeaderVisible = function() {
+  return this._searchInProgress && this._verySlowSearchInProgress;
 };
 
 /**
@@ -351,13 +361,18 @@ HomeController.prototype.search = function() {
     delete self.currentCongressionalDistrict;
   // If the notify callback is called, it means the search is going to take a little more
   // time to complete, so display an extra warning if the search is still going.
-  }, function() {
+  }, function(isVerySlow) {
     if (self._searchInProgress) {
-      self._slowSearchInProgress = true;
+      if (isVerySlow) {
+        self._verySlowSearchInProgress = true;
+      } else {
+        self._slowSearchInProgress = true;
+      }
     }
   }).finally(function() {
     self._searchInProgress = false;
     self._slowSearchInProgress = false;
+    self._verySlowSearchInProgress = false;
   });
 };
 
@@ -433,7 +448,7 @@ HomeController.prototype._initLocationWatcher = function() {
   }, function() {
     if (_.keys(self.$location.search()).length < 1) {
       self.clearResults();
-      self.currentSearch = '';
+      self.currentSearch = null;
     }
   }, true);
 };

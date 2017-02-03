@@ -144,6 +144,16 @@
   display: inline-block;
   margin-top: -3px;
   vertical-align: middle;
+
+  animation-name: slow-search-spin;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes slow-search-spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
 }
 
 .search-card__search-results {
