@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Kadwa|Ultra');
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 .site-header {
   background: #0776a9;
 }
