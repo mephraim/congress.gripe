@@ -12,6 +12,8 @@ var ZIPCODE_REGEX = /^\d+$/;
  * @ngInject
  */
 function SearchService($q, $timeout, CensusService, MembersStoreService, StateInfoService, ZipcodeService) {
+  var currentDeferred;
+
   return {
     isValidAddressSearch: isValidAddressSearch,
     isValidNameSearch: isValidNameSearch,
@@ -31,43 +33,65 @@ function SearchService($q, $timeout, CensusService, MembersStoreService, StateIn
   function search(query) {
     // Use deferred instead of the $q shorthand method because we need to call
     // the `notify` method for slow searches.
-    var deferred = $q.defer();
+    currentDeferred = $q.defer();
 
+    // A zipcode search shouldn't overlap with an address or name search because
+    // it consists of just numbers.
     if (isValidZipcodeSearch(query)) {
-      searchByZipcode(query).then(deferred.resolve, deferred.reject);
-    } else if (isValidNameSearch(query)) {
-      MembersStoreService.search(query).then(function(members) {
-        deferred.resolve({
-          members: members
-        });
-      });
+      searchByZipcode(query).then(function(data) {
+        currentDeferred.resolve(data);
+      }, currentDeferred.reject);
+
+      return currentDeferred.promise;
     }
-    else if (isValidAddressSearch(query)) {
+
+    // If it looks like the search might be an address, try searching for it
+    // first and the fall back on a name search if necessary.
+    if (isValidAddressSearch(query)) {
       // Searching by address will take longer than other types of searches,
       // so notify the caller that some kind of status should be displayed.
       var slowTimeout = $timeout(function() {
-        deferred.notify();
+        currentDeferred.notify();
       }, SLOW_SEARCH_TIMEOUT_MS);
 
       // If the search is taking a really long time, notify the caller.
       var verySlowTimeout = $timeout(function() {
         $timeout.cancel(slowTimeout);
-        deferred.notify(true);
+        currentDeferred.notify(true);
       }, VERY_SLOW_SEARCH_TIMETOUT_MS);
 
       searchByAddress(query).then(function(data) {
-        deferred.resolve(data);
+        currentDeferred.resolve(data);
       }, function() {
-        deferred.reject();
-      }, function() {
+        if (isValidNameSearch(query)) {
+          // Fallback on a name search if no addresses were found
+          MembersStoreService.search(query).then(function(members) {
+            currentDeferred.resolve({
+              members: members
+            });
+          }, currentDeferred.reject);
+        }
+      }).finally(function() {
         $timeout.cancel(slowTimeout);
         $timeout.cancel(verySlowTimeout);
       });
-    } else {
-      deferred.reject();
+
+      return currentDeferred.promise;
     }
 
-    return deferred.promise;
+    // If nothing else looks like it matches, try a name search
+    if (isValidNameSearch(query)) {
+      MembersStoreService.search(query).then(function(members) {
+        currentDeferred.resolve({
+          members: members
+        });
+      });
+
+      return currentDeferred.promise;
+    }
+
+    currentDeferred.reject();
+    return currentDeferred.promise;
   }
 
   /**

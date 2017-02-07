@@ -354,7 +354,9 @@ HomeController.prototype.search = function() {
       self.currentCongressionalDistrict = result.district;
     }
 
-    self._searchResults = result.members;
+    if (result.members) {
+      self._searchResults = result.members;
+    }
   // If the search fails, clear the current district and results
   }, function() {
     delete self._searchResults;
